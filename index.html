@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save Me From Myself</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&family=Lato:wght@400;700&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+   
+</head>
+<body>
+
+    <div class="game-layout">
+        
+        <!-- === WORLD SCENE (CCTV) === -->
+        <div class="world-scene">
+            <div class="cam-ui">
+                <span class="rec-dot"></span>CAM 04 [LIVE]
+            </div>
+            
+            <!-- Background Elements -->
+            <div class="office-window"><div class="city-view"></div></div>
+            <div class="office-cabinet"></div>
+            <div class="office-plant">
+                <div class="plant-pot"></div>
+                <div class="plant-leaves"></div>
+            </div>
+
+            <div id="boss" class="boss-container">
+                <div class="head"></div>
+                <div class="glasses"></div>
+                <div class="body"></div>
+                <div class="shirt"></div>
+                <div class="tie"></div>
+                <div class="boss-phone"></div> 
+                <div class="arm left"><div class="hand"></div></div>
+                <div class="arm right"><div class="hand"></div></div>
+                <div class="desk"></div>
+            </div>
+        </div>
+
+        <!-- === DEVICE FRAME === -->
+        <div class="device-frame">
+            <div class="device-notch"></div>
+
+            <!-- Title Screen (NEW DESIGN) -->
+            <div id="title-screen" class="screen active bg-slate-50 relative z-10 overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-blue-100/50 to-transparent"></div>
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-purple-200 rounded-full blur-3xl opacity-30"></div>
+                <div class="absolute bottom-10 -left-10 w-40 h-40 bg-blue-200 rounded-full blur-3xl opacity-30"></div>
+
+                <div class="flex-1 flex flex-col items-center justify-center p-8 z-10 text-center">
+                    
+                    <!-- Hero Icon -->
+                    <div class="mb-6 relative animate-float">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl rotate-3 shadow-xl flex items-center justify-center text-white text-4xl ring-4 ring-white">
+                            <i class="ph-fill ph-shield-check"></i>
+                        </div>
+                        <div class="absolute -bottom-2 -right-2 w-10 h-10 bg-white rounded-xl shadow-lg flex items-center justify-center text-red-500 text-xl -rotate-6">
+                            <i class="ph-bold ph-warning"></i>
+                        </div>
+                    </div>
+
+                    <h1 class="text-3xl font-black text-slate-800 mb-1 tracking-tight">
+                        Save Me<br><span class="text-indigo-600">From Myself</span>
+                    </h1>
+                    <div class="h-1 w-12 bg-slate-200 rounded-full mb-6"></div>
+                    
+                    <!-- The Narrative Intro -->
+                    <div class="bg-white/80 backdrop-blur-sm p-5 rounded-2xl shadow-sm border border-slate-100 mb-8 w-full">
+                        <p class="text-xs font-bold text-indigo-500 uppercase tracking-widest mb-2">Mission Brief</p>
+                        <p class="text-slate-600 text-sm leading-relaxed font-medium">
+                            <span class="text-slate-900">You are the Virtual Assistant.</span><br>
+                            The Boss is typing dangerously fast. Your job is to spot and fix his typos before he hits <span class="font-bold text-red-500">SEND</span>.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 w-full mb-6">
+                         <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                             <span class="text-2xl mb-1">⏱️</span>
+                             <span class="text-[10px] font-bold text-slate-400 uppercase">Survive</span>
+                             <span class="text-sm font-bold text-slate-700">20 Seconds</span>
+                         </div>
+                         <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                             <span class="text-2xl mb-1">👆</span>
+                             <span class="text-[10px] font-bold text-slate-400 uppercase">Tap To</span>
+                             <span class="text-sm font-bold text-slate-700">Fix Typos</span>
+                         </div>
+                    </div>
+
+                    <button onclick="Game.start()" class="group relative w-full py-4 bg-slate-900 text-white rounded-2xl font-bold text-lg shadow-xl shadow-slate-300 hover:bg-slate-800 hover:scale-[1.02] active:scale-95 transition-all overflow-hidden">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
+                        <span class="relative flex items-center justify-center gap-2">
+                            Accept Job <i class="ph-bold ph-arrow-right"></i>
+                        </span>
+                    </button>
+                    
+                    <p class="mt-4 text-[10px] text-slate-400 font-mono">v1.2 // SYSTEM READY</p>
+                </div>
+            </div>
+
+            <!-- Game Screen -->
+            <div id="game-screen" class="screen app-view relative">
+                <div id="app-header" class="app-header pt-10 pb-3 px-4 z-20 flex items-center justify-between sticky top-0">
+                    <div class="flex items-center gap-3">
+                        <button class="opacity-80 hover:opacity-100"><i class="ph-bold ph-arrow-left text-xl"></i></button>
+                        <div class="flex items-center gap-2">
+                            <div id="app-avatar" class="w-9 h-9 rounded-full bg-slate-200 flex items-center justify-center text-lg shadow-inner overflow-hidden">
+                                <i class="ph-fill ph-user" id="avatar-icon"></i>
+                            </div>
+                            <div class="leading-tight">
+                                <div id="contact-name" class="font-bold text-sm">Boss</div>
+                                <div class="text-[10px] opacity-70 flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span> Online
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col items-end">
+                        <div class="flex items-center gap-1 font-mono font-bold text-lg leading-none" id="timer-box">
+                            <i class="ph-fill ph-clock"></i> <span id="timer">20.0</span>
+                        </div>
+                        <div class="text-[10px] font-bold opacity-60">SCORE: <span id="score">0</span></div>
+                    </div>
+                </div>
+
+                <div class="w-full h-1 bg-black/5 z-20">
+                    <div id="progress-bar" class="h-full bg-current transition-all duration-100 ease-linear w-full opacity-50"></div>
+                </div>
+
+                <div class="flex-1 overflow-y-auto p-4 flex flex-col relative" id="chat-scroll-area">
+                    <div class="flex-1"></div>
+                    <div class="flex flex-col gap-1 mb-6 opacity-60 scale-95 origin-bottom-left">
+                        <div class="self-start bg-black/5 dark:bg-white/10 rounded-2xl rounded-bl-none px-4 py-2 text-sm max-w-[80%]">
+                            <span id="context-msg">Subject: IMPORTANT</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-1 items-end w-full">
+                        <div id="message-container" class="message-box p-4 w-full relative typing-cursor">
+                            <!-- Text Injected Here -->
+                        </div>
+                        <div class="flex justify-between w-full px-1">
+                            <span id="status-indicator" class="text-[10px] font-bold opacity-40 uppercase tracking-widest animate-pulse text-blue-500">Typing...</span>
+                            <i class="ph-bold ph-checks text-blue-500 opacity-0 transition-opacity" id="read-receipt"></i>
+                        </div>
+                    </div>
+                    
+                    <div id="feedback" class="absolute inset-0 pointer-events-none flex items-center justify-center z-30 opacity-0 transform scale-50 transition-all duration-300">
+                        <span id="feedback-text" class="text-5xl font-black text-green-500 drop-shadow-lg -rotate-6 border-4 border-green-500 px-4 py-1 rounded-xl bg-white/90">SAVED!</span>
+                    </div>
+                </div>
+
+                <div id="footer" class="p-3 pb-8 z-20 transition-colors duration-300 border-t border-black/5 bg-white/50 backdrop-blur-md">
+                    <button id="send-btn" class="w-full h-14 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-sm border border-black/5 bg-white text-slate-400 cursor-not-allowed">
+                        <span>Intercept</span> <i class="ph-bold ph-shield-check"></i>
+                    </button>
+                </div>
+
+                <div id="popup" class="hidden absolute z-50 bg-white rounded-xl shadow-2xl ring-1 ring-black/5 p-1 flex-col min-w-[140px] animate-pop origin-bottom-left bottom-24"></div>
+            </div>
+
+            <!-- Results Screen -->
+            <div id="result-screen" class="screen bg-white/90 backdrop-blur-sm items-center justify-center p-6 text-center z-30">
+                <div id="rank-card" class="bg-white w-full rounded-3xl shadow-xl p-8 mb-6 border border-slate-200 transform transition-all hover:scale-105 duration-500">
+                    <div class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Performance Review</div>
+                    <div id="rank-icon" class="w-32 h-32 mx-auto rounded-full bg-slate-100 flex items-center justify-center text-7xl mb-4 shadow-inner">😐</div>
+                    <h2 id="rank-grade" class="text-6xl font-black text-slate-800 mb-2">B-</h2>
+                    <h3 id="rank-title" class="text-xl font-bold text-blue-600 mb-4">Mediocre Typer</h3>
+                    <div class="grid grid-cols-2 gap-4 border-t border-slate-100 pt-6">
+                        <div>
+                            <div class="text-2xl font-black text-slate-800" id="final-score">0</div>
+                            <div class="text-xs text-slate-400 uppercase font-bold">Score</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-black text-slate-800" id="final-count">0</div>
+                            <div class="text-xs text-slate-400 uppercase font-bold">Msgs Saved</div>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="Game.start()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold text-lg shadow-lg shadow-blue-200 hover:bg-blue-500 transition-colors flex items-center justify-center gap-2">
+                    <i class="ph-bold ph-arrow-counter-clockwise"></i> Try Again
+                </button>
+            </div>
+        </div>
+
+    </div>
+<script src="script.js" defer></script>
+</body>
+</html>
