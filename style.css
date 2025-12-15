@@ -1,3 +1,4 @@
+
         :root {
             /* Default variables */
             --app-bg: #f5f5f5;
@@ -5,6 +6,8 @@
             --header-text: #000000;
             --bubble-bg: #ffffff;
             --bubble-text: #000000;
+            --bubble-recv-bg: #e5e7eb; /* Default recv color */
+            --bubble-recv-text: #000000;
             --accent: #3b82f6;
             --fixed-text: #3b82f6;
             --font-main: 'Inter', sans-serif;
@@ -20,26 +23,51 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0f172a; /* Darker background for focus */
+            background-color: #0f172a;
             overflow: hidden;
             user-select: none;
             -webkit-user-select: none;
             margin: 0;
             height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 100vw;
         }
 
-        /* --- LAYOUT WRAPPER --- */
-        .game-layout {
-            display: flex;
+        /* --- LAYOUT WRAPPER (Game View) --- */
+        #game-layout-container {
+            display: none; /* Hidden by default, shown when game starts */
             width: 100%;
             height: 100%;
             max-width: 1400px;
+            margin: 0 auto;
             align-items: center;
             justify-content: space-between;
             padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        #game-layout-container.visible {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* --- FULL SCREEN MENUS --- */
+        .fullscreen-pane {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+        .fullscreen-pane.active {
+            display: flex;
+            opacity: 1;
         }
 
         /* --- THE OFFICE WORLD (Left Side - CCTV Style) --- */
@@ -176,13 +204,12 @@
             transition: background-color 0.3s ease;
         }
 
-        /* Realistic Glasses */
         .glasses {
             width: 80px;
             height: 26px;
             position: absolute;
-            top: 55px; /* Sitting on nose */
-            left: 110px; /* Centered */
+            top: 55px;
+            left: 110px;
             z-index: 22;
             background: linear-gradient(#1e293b, #1e293b) no-repeat center/14px 4px;
         }
@@ -213,7 +240,6 @@
             z-index: 5;
         }
 
-        /* Fixed Shirt Position */
         .shirt {
             width: 40px;
             height: 100px;
@@ -225,7 +251,6 @@
             z-index: 6;
         }
 
-        /* Fixed Tie Position */
         .tie {
             width: 20px;
             height: 80px;
@@ -237,7 +262,6 @@
             z-index: 7;
         }
 
-        /* --- ARMS & HANDS (ROTATED INWARD) --- */
         .arm {
             width: 35px;
             height: 110px;
@@ -250,15 +274,8 @@
             transition: transform 0.3s;
         }
 
-        /* Rotate inwards to hit phone sides naturally */
-        .arm.left { 
-            left: 40px; 
-            transform: rotate(-40deg); 
-        }
-        .arm.right { 
-            right: 40px; 
-            transform: rotate(40deg); 
-        }
+        .arm.left { left: 40px; transform: rotate(-40deg); }
+        .arm.right { right: 40px; transform: rotate(40deg); }
 
         .hand {
             width: 32px;
@@ -271,7 +288,6 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
-        /* The Phone held in center */
         .boss-phone {
             width: 65px;
             height: 100px;
@@ -280,8 +296,8 @@
             border-radius: 10px;
             position: absolute;
             top: 190px;
-            left: 118px; /* Centered relative to arms */
-            z-index: 25; /* Below arms, above body */
+            left: 118px;
+            z-index: 25;
             transform: rotate(0deg); 
             box-shadow: 0 5px 15px rgba(0,0,0,0.4);
             display: flex;
@@ -313,18 +329,9 @@
         }
 
         /* Animations */
-        @keyframes thumb-tap-l {
-            0%, 100% { transform: rotate(-40deg) translateY(0); }
-            50% { transform: rotate(-45deg) translateY(-3px); }
-        }
-        @keyframes thumb-tap-r {
-            0%, 100% { transform: rotate(40deg) translateY(0); }
-            50% { transform: rotate(45deg) translateY(-3px); }
-        }
-        @keyframes phone-bob {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(1px); }
-        }
+        @keyframes thumb-tap-l { 0%, 100% { transform: rotate(-40deg) translateY(0); } 50% { transform: rotate(-45deg) translateY(-3px); } }
+        @keyframes thumb-tap-r { 0%, 100% { transform: rotate(40deg) translateY(0); } 50% { transform: rotate(45deg) translateY(-3px); } }
+        @keyframes phone-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(1px); } }
         @keyframes float { 0%, 100% { transform: translateY(0) rotate(3deg); } 50% { transform: translateY(-5px) rotate(3deg); } }
         .animate-float { animation: float 3s ease-in-out infinite; }
         @keyframes shimmer { 100% { transform: translateX(100%); } }
@@ -333,28 +340,23 @@
         .boss-container.typing .boss-phone { animation: phone-bob 0.1s infinite; }
         .boss-container.typing .arm.left { animation: thumb-tap-l 0.12s infinite; }
         .boss-container.typing .arm.right { animation: thumb-tap-r 0.12s infinite 0.06s; }
-
         .boss-container.angry .head { background-color: #ef4444; }
         .boss-container.angry { animation: shake 0.1s infinite; }
 
-        /* Success Pose */
         .boss-container.success .arm.left { transform: rotate(150deg); transition: transform 0.5s; animation: none; }
         .boss-container.success .arm.right { transform: rotate(-150deg); transition: transform 0.5s; animation: none; }
         .boss-container.success .boss-phone { top: 60px; transition: top 0.5s; }
 
         /* --- DEVICE FRAME (Right Side) --- */
         .device-frame {
-            box-shadow: 
-                0 0 0 12px #1e293b,
-                0 0 0 14px #475569,
-                0 30px 60px -15px rgba(0, 0, 0, 0.6);
-            border-radius: 44px;
+            box-shadow: 0 0 0 12px #1e293b, 0 0 0 14px #475569, 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+            border-radius: 40px;
             position: relative;
             background: #fff;
             overflow: hidden;
             z-index: 50;
-            width: 400px;
-            height: 800px;
+            width: 350px;
+            height: 700px;
             max-height: 90vh;
             border: 4px solid #334155;
             flex-shrink: 0;
@@ -362,14 +364,11 @@
 
         .device-notch {
             position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 28px;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 100px; height: 24px;
             background: #1e293b;
-            border-bottom-left-radius: 14px;
-            border-bottom-right-radius: 14px;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
             z-index: 100;
         }
 
@@ -399,79 +398,68 @@
             line-height: 1.6;
             border: 1px solid rgba(0,0,0,0.05);
             min-height: 100px;
+            display: none; /* Hidden by default, shown when typing */
+            animation: slideUp 0.3s ease;
+        }
+        .message-box.active { display: block; }
+
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        /* Chat History Bubbles */
+        .chat-bubble {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            animation: fadeIn 0.3s ease;
+            word-wrap: break-word;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        .chat-bubble.recv {
+            align-self: flex-start;
+            background-color: var(--bubble-recv-bg);
+            color: var(--bubble-recv-text);
+            border-radius: 1.25rem 1.25rem 1.25rem 0.25rem;
         }
 
-        .pattern-whatsapp {
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 15h10v10H15V15zM65 65h10v10H65V65z' fill='%23000000' fill-opacity='0.06'/%3E%3C/svg%3E");
+        .chat-bubble.sent {
+            align-self: flex-end;
+            background-color: var(--bubble-bg); /* Usually accent color in modern apps, handled via style injection */
+            color: var(--bubble-text);
+            border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
+            box-shadow: var(--shadow);
         }
 
-        .pattern-grid {
-             background-image: radial-gradient(var(--accent) 1px, transparent 1px);
-             background-size: 20px 20px;
-             background-position: -10px -10px;
-        }
+        .pattern-whatsapp { background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 15h10v10H15V15zM65 65h10v10H65V65z' fill='%23000000' fill-opacity='0.06'/%3E%3C/svg%3E"); }
+        .pattern-grid { background-image: radial-gradient(var(--accent) 1px, transparent 1px); background-size: 20px 20px; background-position: -10px -10px; }
 
-        /* Interactions */
         .mistake-word {
-            position: relative;
-            color: #ef4444;
-            font-weight: 700;
-            cursor: pointer;
-            border-bottom: 2px dashed rgba(239, 68, 68, 0.4);
-            transition: all 0.2s;
-            padding: 0 1px;
+            position: relative; color: #ef4444; font-weight: 700; cursor: pointer;
+            border-bottom: 2px dashed rgba(239, 68, 68, 0.4); transition: all 0.2s; padding: 0 1px;
         }
-        
-        .dark-mode .mistake-word {
-            color: #f87171;
-            border-bottom-color: rgba(248, 113, 113, 0.4);
-        }
-
-        .mistake-word:hover {
-            background-color: rgba(239, 68, 68, 0.1);
-            border-radius: 4px;
-        }
-
-        .word-fixed {
-            color: var(--fixed-text); 
-            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: inline-block;
-        }
+        .dark-mode .mistake-word { color: #f87171; border-bottom-color: rgba(248, 113, 113, 0.4); }
+        .mistake-word:hover { background-color: rgba(239, 68, 68, 0.1); border-radius: 4px; }
+        .word-fixed { color: var(--fixed-text); animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: inline-block; }
         
         @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
         .animate-shake { animation: shake 0.3s ease-in-out infinite; }
         
-        .typing-cursor::after {
-            content: '|';
-            animation: blink 1s infinite;
-            color: var(--accent);
-            margin-left: 2px;
-        }
+        .typing-cursor::after { content: '|'; animation: blink 1s infinite; color: var(--accent); margin-left: 2px; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         
-        .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); }
         .screen { display: none; width: 100%; height: 100%; flex-direction: column; }
         .screen.active { display: flex; }
 
-        @media (max-width: 900px) {
-            .game-layout {
-                flex-direction: column-reverse;
-                justify-content: center;
-                padding: 1rem;
-            }
-            .world-scene {
-                height: 200px;
-                width: 100%;
-                margin-right: 0;
-                margin-top: 1rem;
-                flex: none;
-            }
-            .boss-container {
-                transform: scale(0.5);
-                transform-origin: bottom center;
-            }
-            .device-frame {
-                height: 60vh;
-            }
+        /* Locked Character Styles */
+        .locked-char { filter: grayscale(100%) brightness(0.5); opacity: 0.6; cursor: not-allowed; position: relative; }
+        .locked-char::after { content: '🔒'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.5rem; }
+
+        @media (max-width: 500px) {
+            #game-layout-container.visible { flex-direction: column-reverse; justify-content: center; padding: 1rem; }
+            .world-scene { height: 200px; width: 100%; margin-right: 0; margin-top: 1rem; flex: none; }
+            .boss-container { transform: scale(0.5); transform-origin: bottom center; }
+            .device-frame { height: 60vh; }
         }

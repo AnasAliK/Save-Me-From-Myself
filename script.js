@@ -1,220 +1,182 @@
 
-        // --- CONFIG ---
+        // --- DATA ---
         const THEMES = {
+            whatsapp: { appBg: '#efeae2', headerBg: '#008069', headerText: '#ffffff', bubbleBg: '#dcf8c6', bubbleText: '#111b21', bubbleRecvBg: '#ffffff', bubbleRecvText: '#111b21', accent: '#00a884', fixedText: '#00a884', radius: '0.5rem', font: "'Inter', sans-serif", icon: 'ph-whatsapp-logo', pattern: 'whatsapp', footerBg: '#f0f2f5' },
+            imessage: { appBg: '#ffffff', headerBg: 'rgba(245,245,245,0.9)', headerText: '#000000', bubbleBg: '#3b82f6', bubbleText: '#ffffff', bubbleRecvBg: '#e5e5ea', bubbleRecvText: '#000000', accent: '#3b82f6', fixedText: '#fbbf24', radius: '1.2rem', font: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif", icon: 'ph-chat-circle-dots', pattern: 'none', footerBg: '#ffffff' },
+            twitter: { appBg: '#000000', headerBg: 'rgba(0,0,0,0.8)', headerText: '#ffffff', bubbleBg: '#1d9bf0', bubbleText: '#ffffff', bubbleRecvBg: '#2f3336', bubbleRecvText: '#e7e9ea', accent: '#1d9bf0', fixedText: '#1d9bf0', radius: '1rem', font: "'Inter', sans-serif", icon: 'ph-twitter-logo', pattern: 'none', darkMode: true, footerBg: '#000000', border: '1px solid #333' },
+            gmail: { appBg: '#ffffff', headerBg: '#ffffff', headerText: '#444444', bubbleBg: '#ffffff', bubbleText: '#222222', bubbleRecvBg: '#f2f2f2', bubbleRecvText: '#222222', accent: '#ea4335', fixedText: '#ea4335', radius: '4px', font: "'Roboto', sans-serif", icon: 'ph-envelope-simple', pattern: 'none', footerBg: '#ffffff', shadow: '0 1px 2px rgba(0,0,0,0.2)' },
+            discord: { appBg: '#36393f', headerBg: '#2f3136', headerText: '#ffffff', bubbleBg: '#5865F2', bubbleText: '#ffffff', bubbleRecvBg: '#2f3136', bubbleRecvText: '#dcddde', accent: '#5865F2', fixedText: '#5865F2', radius: '4px', font: "'Open Sans', sans-serif", icon: 'ph-discord-logo', pattern: 'none', darkMode: true, footerBg: '#40444b' },
+            tinder: { appBg: '#ffffff', headerBg: 'linear-gradient(to right, #fd267a, #ff6036)', headerText: '#ffffff', bubbleBg: '#fd267a', bubbleText: '#ffffff', bubbleRecvBg: '#f0f2f4', bubbleRecvText: '#111', accent: '#fd267a', fixedText: '#fd267a', radius: '1.5rem', font: "'Inter', sans-serif", icon: 'ph-fire-fill', pattern: 'grid', footerBg: '#ffffff' }
+        };
+
+        const CONVERSATIONS = {
             whatsapp: {
-                appBg: '#efeae2', headerBg: '#008069', headerText: '#ffffff',
-                bubbleBg: '#ffffff', bubbleText: '#111b21', accent: '#00a884', fixedText: '#00a884',
-                radius: '0.5rem', font: "'Inter', sans-serif",
-                icon: 'ph-whatsapp-logo', pattern: 'whatsapp', footerBg: '#f0f2f5'
+                theme: 'whatsapp', name: "Mom",
+                msgs: [
+                    { type: 'recv', text: "Hi honey, are you coming home for Christmas?" },
+                    { type: 'sent', text: "I am trying, but work is crazi.", mistakes: [{o:"crazi",c:"crazy",l:["crazy","hazy","lazy"]}] },
+                    { type: 'recv', text: "You promised last year." },
+                    { type: 'sent', text: "I know, I feel terible about it.", mistakes: [{o:"terible",c:"terrible",l:["terrible","tearable","treble"]}] },
+                    { type: 'recv', text: "Your father misses you." },
+                    { type: 'sent', text: "I mis him too, tell him that.", mistakes: [{o:"mis",c:"miss",l:["miss","mist","mix"]}] },
+                    { type: 'recv', text: "Why don't you call him?" },
+                    { type: 'sent', text: "I will call tomorow, I promis.", mistakes: [{o:"tomorow",c:"tomorrow",l:["tomorrow","marrow","sorrow"]},{o:"promis",c:"promise",l:["promise","miss","premise"]}] },
+                    { type: 'recv', text: "We made your favorite pie." },
+                    { type: 'sent', text: "Stop, you are making me hungri.", mistakes: [{o:"hungri",c:"hungry",l:["hungry","angry","hungary"]}] },
+                    { type: 'recv', text: "Just take a few days off." },
+                    { type: 'sent', text: "My boss is a tyrannt, I can't.", mistakes: [{o:"tyrannt",c:"tyrant",l:["tyrant","ant","rant"]}] },
+                    { type: 'recv', text: "Quit then! Come home." },
+                    { type: 'sent', text: "I need the mony for rent.", mistakes: [{o:"mony",c:"money",l:["money","many","pony"]}] },
+                    { type: 'recv', text: "We can help with rent." },
+                    { type: 'sent', text: "I want to be independant Mom.", mistakes: [{o:"independant",c:"independent",l:["independent","pendant","depend"]}] },
+                    { type: 'recv', text: "Okay, but we worry." },
+                    { type: 'sent', text: "Dont wory, I am doing fine.", mistakes: [{o:"wory",c:"worry",l:["worry","wary","sorry"]}] },
+                    { type: 'recv', text: "Love you, be safe." },
+                    { type: 'sent', text: "Love you to. Bye for now.", mistakes: [{o:"to",c:"too",l:["too","two","toe"]}] }
+                ]
             },
             imessage: {
-                appBg: '#ffffff', headerBg: 'rgba(245,245,245,0.9)', headerText: '#000000',
-                bubbleBg: '#3b82f6', bubbleText: '#ffffff', accent: '#3b82f6', fixedText: '#fbbf24',
-                radius: '1.2rem', font: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                icon: 'ph-chat-circle-dots', pattern: 'none', footerBg: '#ffffff'
+                theme: 'imessage', name: "Landlord",
+                msgs: [
+                    { type: 'recv', text: "We need to talk about the noise." },
+                    { type: 'sent', text: "Was the musick too loud?", mistakes: [{o:"musick",c:"music",l:["music","sick","musk"]}] },
+                    { type: 'recv', text: "Yes, at 2 AM on a Tuesday." },
+                    { type: 'sent', text: "Sory, I lost track of tim.", mistakes: [{o:"Sory",c:"Sorry",l:["Sorry","sore","store"]},{o:"tim",c:"time",l:["time","tim","rim"]}] },
+                    { type: 'recv', text: "The neighbors called the police." },
+                    { type: 'sent', text: "That seems excesive for music.", mistakes: [{o:"excesive",c:"excessive",l:["excessive","access","exit"]}] },
+                    { type: 'recv', text: "This is your second warning." },
+                    { type: 'sent', text: "It wont hapen again, I swear.", mistakes: [{o:"wont",c:"won't",l:["won't","want","went"]},{o:"hapen",c:"happen",l:["happen","pen","happy"]}] },
+                    { type: 'recv', text: "Also, rent is going up." },
+                    { type: 'sent', text: "Wait, you cant do that legaly.", mistakes: [{o:"legaly",c:"legally",l:["legally","legal","regal"]}] },
+                    { type: 'recv', text: "Read your lease agreement." },
+                    { type: 'sent', text: "I did, it says fixed rat.", mistakes: [{o:"rat",c:"rate",l:["rate","rat","late"]}] },
+                    { type: 'recv', text: "Clause 4B allows adjustments." },
+                    { type: 'sent', text: "That is very sneeky of you.", mistakes: [{o:"sneeky",c:"sneaky",l:["sneaky","snake","seek"]}] },
+                    { type: 'recv', text: "Pay up or move out." },
+                    { type: 'sent', text: "I will contact a lawer first.", mistakes: [{o:"lawer",c:"lawyer",l:["lawyer","lower","layer"]}] },
+                    { type: 'recv', text: "Go ahead, try me." },
+                    { type: 'sent', text: "You are being unresonable.", mistakes: [{o:"unresonable",c:"unreasonable",l:["unreasonable","reason","able"]}] },
+                    { type: 'recv', text: "See you in court." },
+                    { type: 'sent', text: "Fine, I will see you ther.", mistakes: [{o:"ther",c:"there",l:["there","their","here"]}] }
+                ]
             },
             twitter: {
-                appBg: '#000000', headerBg: 'rgba(0,0,0,0.8)', headerText: '#ffffff',
-                bubbleBg: '#000000', bubbleText: '#e7e9ea', accent: '#1d9bf0', fixedText: '#1d9bf0',
-                radius: '0px', font: "'Inter', sans-serif",
-                icon: 'ph-twitter-logo', pattern: 'none', darkMode: true, footerBg: '#000000', border: '1px solid #333'
+                theme: 'twitter', name: "CryptoBro",
+                msgs: [
+                    { type: 'recv', text: "Bro, did you see $SCAM coin?" },
+                    { type: 'sent', text: "No, I am done with crupto.", mistakes: [{o:"crupto",c:"crypto",l:["crypto","crypt","corrupt"]}] },
+                    { type: 'recv', text: "It's going to the moon! 🚀" },
+                    { type: 'sent', text: "That is what you said last tim.", mistakes: [{o:"tim",c:"time",l:["time","tim","rim"]}] },
+                    { type: 'recv', text: "This time is different." },
+                    { type: 'sent', text: "It is always a rug pul.", mistakes: [{o:"pul",c:"pull",l:["pull","pool","pill"]}] },
+                    { type: 'recv', text: "Elon tweeted about it." },
+                    { type: 'sent', text: "He just wants to pump the pric.", mistakes: [{o:"pric",c:"price",l:["price","prick","rice"]}] },
+                    { type: 'recv', text: "You have paper hands lol." },
+                    { type: 'sent', text: "I have empty pockts because of you.", mistakes: [{o:"pockts",c:"pockets",l:["pockets","packs","rockets"]}] },
+                    { type: 'recv', text: "Look, it's up 500%!" },
+                    { type: 'sent', text: "It will crash in an howr.", mistakes: [{o:"howr",c:"hour",l:["hour","how","our"]}] },
+                    { type: 'recv', text: "You're just jealous." },
+                    { type: 'sent', text: "I am just being realistik.", mistakes: [{o:"realistik",c:"realistic",l:["realistic","real","stick"]}] },
+                    { type: 'recv', text: "Wait... it's dropping." },
+                    { type: 'sent', text: "I told you it was a buble.", mistakes: [{o:"buble",c:"bubble",l:["bubble","bobble","rubble"]}] },
+                    { type: 'recv', text: "Omg I lost everything." },
+                    { type: 'sent', text: "You should have sold erlier.", mistakes: [{o:"erlier",c:"earlier",l:["earlier","early","air"]}] },
+                    { type: 'recv', text: "Can I borrow $50?" },
+                    { type: 'sent', text: "Not a chanse buddy.", mistakes: [{o:"chanse",c:"chance",l:["chance","change","chase"]}] }
+                ]
             },
             gmail: {
-                appBg: '#ffffff', headerBg: '#ffffff', headerText: '#444444',
-                bubbleBg: '#ffffff', bubbleText: '#222222', accent: '#ea4335', fixedText: '#ea4335',
-                radius: '4px', font: "'Roboto', sans-serif",
-                icon: 'ph-envelope-simple', pattern: 'none', footerBg: '#ffffff', shadow: '0 1px 2px rgba(0,0,0,0.2)'
+                theme: 'gmail', name: "HR Dept",
+                msgs: [
+                    { type: 'recv', text: "Subject: Urgent Meeting" },
+                    { type: 'sent', text: "Is this about the coffe incident?", mistakes: [{o:"coffe",c:"coffee",l:["coffee","cough","coffin"]}] },
+                    { type: 'recv', text: "Yes, and the fire alarm." },
+                    { type: 'sent', text: "That was an acident, I swear.", mistakes: [{o:"acident",c:"accident",l:["accident","dent","acid"]}] },
+                    { type: 'recv', text: "You microwaved foil." },
+                    { type: 'sent', text: "I wanted a hot sandwitch fast.", mistakes: [{o:"sandwitch",c:"sandwich",l:["sandwich","sand","witch"]}] },
+                    { type: 'recv', text: "The breakroom is ruined." },
+                    { type: 'sent', text: "I can pay for the dammage.", mistakes: [{o:"dammage",c:"damage",l:["damage","damn","age"]}] },
+                    { type: 'recv', text: "It's $5000 in damages." },
+                    { type: 'sent', text: "Okay, maybe I cant aford that.", mistakes: [{o:"aford",c:"afford",l:["afford","ford","effort"]}] },
+                    { type: 'recv', text: "We are reviewing your contract." },
+                    { type: 'sent', text: "Please dont fire me, I need job.", mistakes: [{o:"dont",c:"don't",l:["don't","dent","dot"]}] },
+                    { type: 'recv', text: "This is your third strike." },
+                    { type: 'sent', text: "I promiss to be more careful.", mistakes: [{o:"promiss",c:"promise",l:["promise","miss","kiss"]}] },
+                    { type: 'recv', text: "Come to my office now." },
+                    { type: 'sent', text: "Can I finish my repot first?", mistakes: [{o:"repot",c:"report",l:["report","pot","port"]}] },
+                    { type: 'recv', text: "No. Now." },
+                    { type: 'sent', text: "Okay, I am on my wae.", mistakes: [{o:"wae",c:"way",l:["way","weigh","why"]}] },
+                    { type: 'recv', text: "Bring your badge." },
+                    { type: 'sent', text: "That sounds ominus.", mistakes: [{o:"ominus",c:"ominous",l:["ominous","minus","bus"]}] }
+                ]
             },
             discord: {
-                appBg: '#36393f', headerBg: '#2f3136', headerText: '#ffffff',
-                bubbleBg: '#40444b', bubbleText: '#dcddde', accent: '#5865F2', fixedText: '#5865F2',
-                radius: '4px', font: "'Open Sans', sans-serif",
-                icon: 'ph-discord-logo', pattern: 'none', darkMode: true, footerBg: '#40444b'
+                theme: 'discord', name: "Raid Leader",
+                msgs: [
+                    { type: 'recv', text: "Where are you? Raid started." },
+                    { type: 'sent', text: "My internet is down agan.", mistakes: [{o:"agan",c:"again",l:["again","gain","pain"]}] },
+                    { type: 'recv', text: "Use your hotspot then." },
+                    { type: 'sent', text: "I dont have much data lef.", mistakes: [{o:"lef",c:"left",l:["left","leaf","life"]}] },
+                    { type: 'recv', text: "We need a healer." },
+                    { type: 'sent', text: "Can't you find a replaceement?", mistakes: [{o:"replaceement",c:"replacement",l:["replacement","place","cement"]}] },
+                    { type: 'recv', text: "At this hour? No." },
+                    { type: 'sent', text: "Okay I will try to loggin.", mistakes: [{o:"loggin",c:"login",l:["login","log","gin"]}] },
+                    { type: 'recv', text: "Hurry up." },
+                    { type: 'sent', text: "It is patching, so sloow.", mistakes: [{o:"sloow",c:"slow",l:["slow","low","slew"]}] },
+                    { type: 'recv', text: "We wiped again." },
+                    { type: 'sent', text: "That is not my falt!", mistakes: [{o:"falt",c:"fault",l:["fault","fall","felt"]}] },
+                    { type: 'recv', text: "You are the main healer." },
+                    { type: 'sent', text: "I am loging in right now.", mistakes: [{o:"loging",c:"logging",l:["logging","log","gin"]}] },
+                    { type: 'recv', text: "Too late, we kicked you." },
+                    { type: 'sent', text: "Wow that is very rood.", mistakes: [{o:"rood",c:"rude",l:["rude","road","root"]}] },
+                    { type: 'recv', text: "Git gud." },
+                    { type: 'sent', text: "I am blocking you, goodbi.", mistakes: [{o:"goodbi",c:"goodbye",l:["goodbye","good","bye"]}] },
+                    { type: 'recv', text: "Whatever." },
+                    { type: 'sent', text: "Have fun losing without m.", mistakes: [{o:"m",c:"me",l:["me","my","mu"]}] }
+                ]
             },
             tinder: {
-                appBg: '#ffffff', headerBg: 'linear-gradient(to right, #fd267a, #ff6036)', headerText: '#ffffff',
-                bubbleBg: '#f0f2f4', bubbleText: '#111', accent: '#fd267a', fixedText: '#fd267a',
-                radius: '1.5rem', font: "'Inter', sans-serif", icon: 'ph-fire-fill', pattern: 'grid', footerBg: '#ffffff'
+                theme: 'tinder', name: "Date",
+                msgs: [
+                    { type: 'recv', text: "Your photos look different." },
+                    { type: 'sent', text: "I used a filter, no big deel.", mistakes: [{o:"deel",c:"deal",l:["deal","dill","dell"]}] },
+                    { type: 'recv', text: "You look 10 years older." },
+                    { type: 'sent', text: "It is just bad lightng here.", mistakes: [{o:"lightng",c:"lighting",l:["lighting","light","lightning"]}] },
+                    { type: 'recv', text: "And you're shorter." },
+                    { type: 'sent', text: "I am sitting down actualy.", mistakes: [{o:"actualy",c:"actually",l:["actually","act","ally"]}] },
+                    { type: 'recv', text: "You said you were a pilot." },
+                    { type: 'sent', text: "I have a drone, same thng.", mistakes: [{o:"thng",c:"thing",l:["thing","thong","tang"]}] },
+                    { type: 'recv', text: "This date is over." },
+                    { type: 'sent', text: "Wait dont be so hasty.", mistakes: [{o:"hasty",c:"hasty",l:["hasty","pasty","tasty"]}] },
+                    { type: 'recv', text: "You lied about everything." },
+                    { type: 'sent', text: "I just embelished a little.", mistakes: [{o:"embelished",c:"embellished",l:["embellished","bell","shed"]}] },
+                    { type: 'recv', text: "I'm leaving." },
+                    { type: 'sent', text: "But I ordered apetizers!", mistakes: [{o:"apetizers",c:"appetizers",l:["appetizers","petite","tizer"]}] },
+                    { type: 'recv', text: "Eat them yourself." },
+                    { type: 'sent', text: "Fine, more for me then.", mistakes: [{o:"then",c:"then",l:["then","than","ten"]}] },
+                    { type: 'recv', text: "Lose my number." },
+                    { type: 'sent', text: "Your los, I am a catch.", mistakes: [{o:"los",c:"loss",l:["loss","lost","less"]}] },
+                    { type: 'recv', text: "Bye." },
+                    { type: 'sent', text: "Have a nice lif alone.", mistakes: [{o:"lif",c:"life",l:["life","lift","if"]}] }
+                ]
             }
         };
 
-        const MESSAGES = [
-            { 
-                theme: 'gmail', from: "HR Dept", context: "RE: Harassment Complaint", 
-                text: "That accusation is totaly fals! I was only giving constuctive critcism to the intern about his atire. I am a profesional and I demand an appology immeditly.", 
-                mistakes: [
-                    {o:"totaly",c:"totally",l:["totally","total","toally"]},
-                    {o:"fals",c:"false",l:["false","falls","fails"]},
-                    {o:"constuctive",c:"constructive",l:["constructive","construction","constitutive"]},
-                    {o:"critcism",c:"criticism",l:["criticism","critique","critical"]},
-                    {o:"atire",c:"attire",l:["attire","tire","entire"]},
-                    {o:"profesional",c:"professional",l:["professional","professor","provisional"]},
-                    {o:"appology",c:"apology",l:["apology","ecology","apollogy"]},
-                    {o:"immeditly",c:"immediately",l:["immediately","media","idly"]}
-                ] 
-            },
-            { 
-                theme: 'whatsapp', from: "Mom", context: "Where are you?? Dinner started!", 
-                text: "Sory Mom, I cant make it to diner. Too much work at the ofice. Ill visit next wek I promis. Please dont be angery with me.", 
-                mistakes: [
-                    {o:"Sory",c:"Sorry",l:["Sorry","Store","Sore"]},
-                    {o:"diner",c:"dinner",l:["dinner","diver","dimmer"]},
-                    {o:"ofice",c:"office",l:["office","offal","official"]},
-                    {o:"wek",c:"week",l:["week","weak","wake"]},
-                    {o:"promis",c:"promise",l:["promise","miss","premise"]},
-                    {o:"angery",c:"angry",l:["angry","hungry","energy"]}
-                ] 
-            },
-            { 
-                theme: 'discord', from: "Raid Leader", context: "Pulling in 10s...", 
-                text: "Wait! Dont start the rade without me! I am loging in right now. My internet was laging. If you pull early I will kick you from the gild.", 
-                mistakes: [
-                    {o:"rade",c:"raid",l:["raid","fade","trade"]},
-                    {o:"loging",c:"logging",l:["logging","lodging","lagging"]},
-                    {o:"laging",c:"lagging",l:["lagging","laughing","landing"]},
-                    {o:"gild",c:"guild",l:["guild","gold","gilt"]}
-                ] 
-            },
-            { 
-                theme: 'twitter', from: "Followers", context: "Compose Tweet", 
-                text: "Just had a genus idea. What if we put a resturant on the Moon? The food would be good but no atmosphere haha. Investors DM me for colabaration. #visonary", 
-                mistakes: [
-                    {o:"genus",c:"genius",l:["genius","genus","genes"]},
-                    {o:"resturant",c:"restaurant",l:["restaurant","restroom","rant"]},
-                    {o:"colabaration",c:"collaboration",l:["collaboration","labor","oration"]},
-                    {o:"visonary",c:"visionary",l:["visionary","visor","visual"]}
-                ] 
-            },
-            { 
-                theme: 'imessage', from: "Landlord", context: "Rent is late again.", 
-                text: "I already sent the chek yesterday! Please chack your bank acount again before you acuse me. I am not lying about the mony. I am a good tenent.", 
-                mistakes: [
-                    {o:"chek",c:"cheque",l:["check","cheek","cheque"]},
-                    {o:"chack",c:"check",l:["check","cheek","cheque"]},
-                    {o:"acount",c:"account",l:["account","count","amount"]},
-                    {o:"acuse",c:"accuse",l:["accuse","cause","abuse"]},
-                    {o:"mony",c:"money",l:["money","many","moon"]},
-                    {o:"tenent",c:"tenant",l:["tenant","tenet","tent"]}
-                ] 
-            },
-            { 
-                theme: 'tinder', from: "Jessica (24)", context: "She said: 'Hey'", 
-                text: "Hey beautiful, you look gorgous in your pics. Want to grab cofee and discuss sinergy? I am a very succsesful CEO looking for a soulmate.", 
-                mistakes: [
-                    {o:"gorgous",c:"gorgeous",l:["gorgeous","fungus","george"]},
-                    {o:"cofee",c:"coffee",l:["coffee","fee","cough"]},
-                    {o:"sinergy",c:"synergy",l:["synergy","energy","sin"]},
-                    {o:"succsesful",c:"successful",l:["successful","suck","stressful"]}
-                ] 
-            },
-            { 
-                theme: 'discord', from: "ModTeam", context: "#appeals", 
-                text: "Unban me right now. I did not break the rools. The mod was being toxick and abused his powr. This is unfair treatmant and I will report this servr.", 
-                mistakes: [
-                    {o:"rools",c:"rules",l:["rules","rolls","tools"]},
-                    {o:"toxick",c:"toxic",l:["toxic","tick","tock"]},
-                    {o:"powr",c:"power",l:["power","poor","pour"]},
-                    {o:"treatmant",c:"treatment",l:["treatment","treat","mantra"]},
-                    {o:"servr",c:"server",l:["server","serve","saver"]}
-                ] 
-            },
-            { 
-                theme: 'gmail', from: "IT Support", context: "Ticket #4092", 
-                text: "My laptop screen is blak again. I cannot work like this. Fix it immediatly or I will fire the whole department. Stop asking if I pluged it in!", 
-                mistakes: [
-                    {o:"blak",c:"black",l:["black","blank","back"]},
-                    {o:"immediatly",c:"immediately",l:["immediately","medium","idly"]},
-                    {o:"pluged",c:"plugged",l:["plugged","plague","pug"]}
-                ] 
-            },
-            { 
-                theme: 'imessage', from: "Ex-Wife", context: "Can I see the kids?", 
-                text: "Please let me see them on Satuday. I promis I will be on time. I miss them alot. Don't be so crule to me, I am trying to chnage.", 
-                mistakes: [
-                    {o:"Satuday",c:"Saturday",l:["Saturday","Saturn","Day"]},
-                    {o:"promis",c:"promise",l:["promise","miss","prom"]},
-                    {o:"alot",c:"a lot",l:["a lot","allot","pilot"]},
-                    {o:"crule",c:"cruel",l:["cruel","rule","crude"]},
-                    {o:"chnage",c:"change",l:["change","charge","range"]}
-                ] 
-            },
-            { 
-                theme: 'whatsapp', from: "Employee Group", context: "Who ate my lunch?", 
-                text: "Stop wasting time chating! Get back to work. Also, whoever took my sandwitch from the fridge is fired. I am not kiding. Check the camras.", 
-                mistakes: [
-                    {o:"chating",c:"chatting",l:["chatting","cheating","charting"]},
-                    {o:"sandwitch",c:"sandwich",l:["sandwich","witch","sand"]},
-                    {o:"kiding",c:"kidding",l:["kidding","kid","hiding"]},
-                    {o:"camras",c:"cameras",l:["cameras","cam","karma"]}
-                ] 
-            },
-            { 
-                theme: 'twitter', from: "Customer Support", context: "DM: My order is late", 
-                text: "Listen, we are doing our best. The wether is bad causing delays. Your pakage will arrive eventuly. Stop spaming us or I will block you.", 
-                mistakes: [
-                    {o:"wether",c:"weather",l:["weather","whether","wither"]},
-                    {o:"pakage",c:"package",l:["package","pack","page"]},
-                    {o:"eventuly",c:"eventually",l:["eventually","event","vent"]},
-                    {o:"spaming",c:"spamming",l:["spamming","spa","same"]}
-                ] 
-            },
-            { 
-                theme: 'imessage', from: "Bro", context: "Gym?", 
-                text: "Nah bro, I pulled a musle. Cant lift today. Maybe tomorow we can hit legs. Honestly I am just lazzy right now.", 
-                mistakes: [
-                    {o:"musle",c:"muscle",l:["muscle","mussel","muzzle"]},
-                    {o:"tomorow",c:"tomorrow",l:["tomorrow","sorrow","marrow"]},
-                    {o:"lazzy",c:"lazy",l:["lazy","dizzy","hazy"]}
-                ] 
-            },
-            { 
-                theme: 'tinder', from: "Sarah (22)", context: "Bio", 
-                text: "Just looking for someone who can handl me. I like long walks on the beeach and watching sunsetts. Swipe right if you are ritch.", 
-                mistakes: [
-                    {o:"handl",c:"handle",l:["handle","hand","hold"]},
-                    {o:"beeach",c:"beach",l:["beach","each","peach"]},
-                    {o:"sunsetts",c:"sunsets",l:["sunsets","sets","sons"]},
-                    {o:"ritch",c:"rich",l:["rich","itch","pitch"]}
-                ] 
-            },
-            { 
-                theme: 'whatsapp', from: "Neighbour", context: "Music too loud!", 
-                text: "It is not that loud! Stop complaning. I have the right to listen to jazz in my own hous. If you call the copss I will sue you.", 
-                mistakes: [
-                    {o:"complaning",c:"complaining",l:["complaining","plane","planning"]},
-                    {o:"hous",c:"house",l:["house","mouse","hose"]},
-                    {o:"copss",c:"cops",l:["cops","caps","cups"]}
-                ] 
-            },
-            { 
-                theme: 'gmail', from: "All Staff", context: "Subject: Budget Cuts", 
-                text: "Due to recent losses, we are frezing all bonuses. This is necesary to save the company. Also, free cofee is cancelled. Work hardr.", 
-                mistakes: [
-                    {o:"frezing",c:"freezing",l:["freezing","frizz","fresh"]},
-                    {o:"necesary",c:"necessary",l:["necessary","nice","cesspool"]},
-                    {o:"cofee",c:"coffee",l:["coffee","fee","cough"]},
-                    {o:"hardr",c:"harder",l:["harder","hard","order"]}
-                ] 
-            }
-        ];
-
+        // --- AUDIO SYSTEM ---
         const AudioSys = {
             ctx: null,
+            isMuted: false,
+            musicTimer: null,
             init() { if(!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); },
-            playClick() {
-                if(!this.ctx) return;
-                const t = this.ctx.currentTime;
-                const osc = this.ctx.createOscillator();
-                const gain = this.ctx.createGain();
-                osc.frequency.setValueAtTime(800, t);
-                osc.frequency.exponentialRampToValueAtTime(100, t + 0.05);
-                gain.gain.setValueAtTime(0.3, t);
-                gain.gain.exponentialRampToValueAtTime(0.01, t + 0.05);
-                osc.connect(gain); gain.connect(this.ctx.destination);
-                osc.start(t); osc.stop(t + 0.05);
+            toggleMute() {
+                this.isMuted = !this.isMuted;
+                const btn = document.getElementById('mute-btn');
+                if (btn) btn.innerText = this.isMuted ? "UNMUTE SOUND" : "MUTE SOUND";
+                if (this.isMuted) this.stopMusic();
+                else if (Game.state.active && !Game.state.paused) this.playMusic();
             },
             playTone(type, f, d, vol=0.1) {
-                if(!this.ctx) return;
+                if(!this.ctx || this.isMuted) return;
                 const o = this.ctx.createOscillator();
                 const g = this.ctx.createGain();
                 o.type = type; o.frequency.value = f;
@@ -222,9 +184,30 @@
                 g.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + d);
                 o.connect(g); g.connect(this.ctx.destination);
                 o.start(); o.stop(this.ctx.currentTime + d);
+            },
+            playClick() { this.playTone('sine', 800, 0.05, 0.1); },
+            playRecv() { this.playTone('sine', 600, 0.1, 0.1); setTimeout(()=>this.playTone('sine', 800, 0.1, 0.1), 100); },
+            playMusic() {
+                if (this.isMuted || !this.ctx || this.musicTimer) return;
+                // Simple bass groove
+                const loop = () => {
+                    if (!Game.state.active || Game.state.paused) return;
+                    // Bass
+                    this.playTone('triangle', 110, 0.2, 0.05); // A2
+                    setTimeout(() => { if(Game.state.active && !Game.state.paused) this.playTone('triangle', 110, 0.2, 0.05) }, 250);
+                    setTimeout(() => { if(Game.state.active && !Game.state.paused) this.playTone('triangle', 164.8, 0.2, 0.05) }, 500); // E3
+                    setTimeout(() => { if(Game.state.active && !Game.state.paused) this.playTone('triangle', 130.8, 0.2, 0.05) }, 750); // C3
+                    
+                    this.musicTimer = setTimeout(loop, 1000);
+                }
+                loop();
+            },
+            stopMusic() {
+                if (this.musicTimer) { clearTimeout(this.musicTimer); this.musicTimer = null; }
             }
         };
 
+        // --- GAME LOGIC ---
         const Boss = {
             elem: document.getElementById('boss'),
             state(state) {
@@ -235,7 +218,15 @@
 
         const UI = {
             root: document.documentElement.style,
-            screens: { title: document.getElementById('title-screen'), game: document.getElementById('game-screen'), result: document.getElementById('result-screen') },
+            screens: { 
+                menu: document.getElementById('screen-menu'), 
+                time: document.getElementById('screen-time'),
+                char: document.getElementById('screen-char'),
+                game: document.getElementById('screen-game'), 
+                result: document.getElementById('screen-result'),
+                pause: document.getElementById('screen-pause')
+            },
+            layout: document.getElementById('game-layout-container'),
             elems: {
                 timer: document.getElementById('timer'),
                 score: document.getElementById('score'),
@@ -244,22 +235,59 @@
                 sendBtn: document.getElementById('send-btn'),
                 popup: document.getElementById('popup'),
                 feedback: document.getElementById('feedback'),
-                ctxMsg: document.getElementById('context-msg'),
+                // ctxMsg: document.getElementById('context-msg'), // REMOVED to fix error
                 contact: document.getElementById('contact-name'),
                 avatarIcon: document.getElementById('avatar-icon'),
                 status: document.getElementById('status-indicator'),
                 chatArea: document.getElementById('chat-scroll-area')
             },
-            showScreen(id) { Object.values(this.screens).forEach(s => s.classList.remove('active')); this.screens[id].classList.add('active'); },
+            showScreen(id) { 
+                const key = id.replace('screen-', ''); // Derived key
+                
+                // Handle Full Screen vs Game Layers
+                if (['menu', 'time', 'char'].includes(key)) {
+                     // Show Full Screen Layer
+                     this.layout.classList.remove('visible');
+                     Object.values(this.screens).forEach(s => {
+                         if(s && s.classList.contains('fullscreen-pane')) s.classList.remove('active');
+                     });
+                     if(this.screens[key]) this.screens[key].classList.add('active');
+                } else {
+                    // Show Game Layer
+                    this.layout.classList.add('visible');
+                    // Hide all fullscreen panes
+                     Object.values(this.screens).forEach(s => {
+                         if(s && s.classList.contains('fullscreen-pane')) s.classList.remove('active');
+                     });
+                    
+                    // Handle inner-phone screens
+                    ['game', 'result'].forEach(k => {
+                        const s = this.screens[k];
+                        if(s) s.classList.remove('active');
+                    });
+                    
+                    if(key !== 'pause') this.screens.pause.classList.add('hidden');
+                    
+                    if (this.screens[key] && !this.screens[key].classList.contains('fullscreen-pane')) {
+                        this.screens[key].classList.add('active');
+                    }
+                }
+            },
+            togglePauseScreen(show) {
+                if(show) this.screens.pause.classList.remove('hidden');
+                else this.screens.pause.classList.add('hidden');
+            },
             applyTheme(key) {
                 const t = THEMES[key] || THEMES.imessage;
                 const r = this.root;
-                const g = document.getElementById('game-screen');
+                const g = document.getElementById('screen-game');
                 r.setProperty('--app-bg', t.appBg);
                 r.setProperty('--header-bg', t.headerBg);
                 r.setProperty('--header-text', t.headerText);
                 r.setProperty('--bubble-bg', t.bubbleBg);
                 r.setProperty('--bubble-text', t.bubbleText);
+                r.setProperty('--bubble-recv-bg', t.bubbleRecvBg);
+                r.setProperty('--bubble-recv-text', t.bubbleRecvText);
                 r.setProperty('--accent', t.accent);
                 r.setProperty('--fixed-text', t.fixedText || t.accent);
                 r.setProperty('--font-main', t.font);
@@ -274,21 +302,197 @@
         };
 
         const Game = {
-            state: { score: 0, msgs: 0, time: 20, active: false, deck: [] }, // Set time to 20
+            state: { score: 0, msgs: 0, time: 20, initialTime: 20, active: false, paused: false, conversation: [], msgIndex: 0, currentApp: null },
             loop: null, typeLoop: null, currentMsg: null, mistakeCount: 0, mistakesFixed: 0, isTyping: false,
-            start() {
+            
+            // NAVIGATION
+            goToTimeSelect() {
                 AudioSys.init();
+                AudioSys.playClick();
                 if(AudioSys.ctx.state === 'suspended') AudioSys.ctx.resume();
-                this.state = { score: 0, msgs: 0, time: 20, active: true, deck: [...MESSAGES].sort(()=>Math.random()-.5) };
-                UI.showScreen('game');
-                this.nextMsg();
-                this.loop = setInterval(() => this.tick(), 100);
+                UI.showScreen('screen-time');
             },
-            tick() {
+
+            selectTime(t) {
+                AudioSys.playClick();
+                this.state.initialTime = t;
+                this.goToCharSelect();
+            },
+
+            goToCharSelect() {
+                AudioSys.playClick();
+                UI.showScreen('screen-char');
+            },
+
+            quitToMenu() {
+                AudioSys.playClick();
+                this.endGameLogic();
+                UI.showScreen('screen-menu');
+            },
+
+            togglePause() {
+                AudioSys.playClick();
                 if (!this.state.active) return;
+                this.state.paused = !this.state.paused;
+                if (this.state.paused) {
+                    UI.togglePauseScreen(true);
+                    AudioSys.stopMusic();
+                } else {
+                    UI.togglePauseScreen(false);
+                    AudioSys.playMusic();
+                }
+            },
+
+            startGame() {
+                AudioSys.playClick();
+                
+                // Select random app conversation
+                const apps = Object.keys(CONVERSATIONS);
+                const randomAppKey = apps[Math.floor(Math.random() * apps.length)];
+                const appData = CONVERSATIONS[randomAppKey];
+
+                this.state = { 
+                    score: 0, msgs: 0, 
+                    time: this.state.initialTime, 
+                    initialTime: this.state.initialTime, 
+                    active: true, paused: false,
+                    currentApp: randomAppKey,
+                    conversation: appData.msgs,
+                    msgIndex: 0
+                };
+                
+                // Clear chat
+                const spacer = document.createElement('div');
+                spacer.className = "flex-1";
+                UI.elems.chatArea.innerHTML = '';
+                UI.elems.chatArea.appendChild(spacer);
+                
+                UI.showScreen('screen-game');
+                UI.applyTheme(appData.theme);
+                
+                UI.elems.contact.innerText = appData.name;
+                // UI.elems.ctxMsg.innerText = "Conversation Started"; // REMOVED
+                UI.elems.score.innerText = 0;
+
+                AudioSys.playMusic();
+                if(this.loop) clearInterval(this.loop);
+                this.loop = setInterval(() => this.tick(), 100);
+
+                // Start conversation flow
+                this.processNextMsg();
+            },
+
+            processNextMsg() {
+                if (!this.state.active || this.state.paused) return;
+                
+                if (this.state.msgIndex >= this.state.conversation.length) {
+                    // Conversation over - give bonus or end?
+                    // Let's just end it as a "win" if time remains, or keep timer running?
+                    // User said "1 set of 10 sent and 10 receive".
+                    // If they finish early, maybe big bonus points?
+                    this.state.score += Math.floor(this.state.time * 100);
+                    this.end();
+                    return;
+                }
+
+                const msg = this.state.conversation[this.state.msgIndex];
+
+                if (msg.type === 'recv') {
+                    // Show received message bubble
+                    UI.elems.msgBox.classList.remove('active');
+                    UI.elems.status.innerText = "Online";
+                    UI.elems.status.classList.remove('animate-pulse');
+                    UI.elems.sendBtn.style.opacity = '0.5';
+
+                    setTimeout(() => {
+                        if(!this.state.active) return;
+                        this.addChatBubble(msg.text, 'recv');
+                        AudioSys.playRecv();
+                        this.state.msgIndex++;
+                        setTimeout(() => this.processNextMsg(), 1000); // Wait before next action
+                    }, 500);
+                } else {
+                    // 'sent' message - Player must type
+                    this.startTypingLevel(msg);
+                }
+            },
+
+            startTypingLevel(msg) {
+                this.currentMsg = msg;
+                this.mistakeCount = 0;
+                this.mistakesFixed = 0;
+
+                UI.elems.sendBtn.innerHTML = `<span>Intercept</span> <i class="ph-bold ph-shield-check"></i>`;
+                UI.elems.sendBtn.style.background = 'white';
+                UI.elems.sendBtn.style.color = '#94a3b8';
+                UI.elems.sendBtn.style.cursor = 'not-allowed';
+                UI.elems.sendBtn.style.opacity = '1';
+
+                UI.elems.msgBox.innerHTML = '';
+                UI.elems.msgBox.classList.add('active'); // Show typing box
+                UI.elems.msgBox.classList.add('typing-cursor');
+                UI.elems.status.innerText = "BOSS TYPING...";
+                UI.elems.status.classList.add('animate-pulse');
+                this.isTyping = true;
+                
+                const words = msg.text.split(/(\s+)/);
+                let wordIndex = 0;
+                const speed = 40; 
+                
+                if (this.typeLoop) clearInterval(this.typeLoop);
+                
+                this.typeLoop = setInterval(() => {
+                    if (!this.state.active || this.state.paused) return;
+                    
+                    if (wordIndex < words.length) {
+                        const w = words[wordIndex];
+                        const span = document.createElement('span');
+                        span.innerText = w;
+                        const clean = w.trim().replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g,"");
+                        const err = msg.mistakes ? msg.mistakes.find(m => m.o === clean) : null;
+                        if (err && w.trim().length > 0) {
+                            this.mistakeCount++;
+                            span.className = 'mistake-word';
+                            span.onclick = (e) => this.showPopup(e, span, err);
+                        }
+                        UI.elems.msgBox.appendChild(span);
+                        // Auto scroll if typing fills box? 
+                        // The box is fixed height, overflow visible.
+                        if (w.trim().length > 0) AudioSys.playClick();
+                        wordIndex++;
+                    } else {
+                        clearInterval(this.typeLoop);
+                        this.isTyping = false;
+                        UI.elems.msgBox.classList.remove('typing-cursor');
+                        // Allow sending if no mistakes
+                        if (this.mistakeCount === 0) {
+                            // Instant completion if no mistakes generated (rare/tutorial)
+                             this.completeMsg();
+                        } else {
+                            UI.elems.status.innerText = "Drafting paused";
+                            UI.elems.status.classList.remove('animate-pulse');
+                        }
+                    }
+                }, speed);
+            },
+
+            addChatBubble(text, type) {
+                const bubble = document.createElement('div');
+                bubble.className = `chat-bubble ${type}`;
+                bubble.innerText = text;
+                // Insert before the typing area spacer or just append to container
+                // The container has a flex-1 spacer at the top. We append after it.
+                UI.elems.chatArea.appendChild(bubble);
+                UI.elems.chatArea.scrollTop = UI.elems.chatArea.scrollHeight;
+            },
+
+            tick() {
+                if (!this.state.active || this.state.paused) return;
+                
                 this.state.time -= 0.1;
                 UI.elems.timer.innerText = Math.max(0, this.state.time).toFixed(1);
-                document.getElementById('progress-bar').style.width = (this.state.time/20)*100 + "%";
+                document.getElementById('progress-bar').style.width = (this.state.time/this.state.initialTime)*100 + "%";
+                
                 if (this.isTyping) Boss.state('typing');
                 else if (this.state.time <= 5) {
                     Boss.state('angry');
@@ -299,60 +503,12 @@
                     Boss.state('');
                     UI.elems.sendBtn.classList.remove('animate-shake');
                 }
+                
                 if (this.state.time <= 0) this.end();
             },
-            nextMsg() {
-                if(this.state.deck.length === 0) this.state.deck = [...MESSAGES].sort(()=>Math.random()-.5);
-                const msg = this.state.deck.pop();
-                this.currentMsg = msg;
-                this.mistakeCount = 0;
-                this.mistakesFixed = 0;
-                
-                UI.applyTheme(msg.theme);
-                // Update Contact Name to reflect OUTGOING message
-                UI.elems.contact.innerText = `To: ${msg.from}`; 
-                UI.elems.ctxMsg.innerText = msg.context;
-                UI.elems.score.innerText = this.state.score;
-                UI.elems.sendBtn.innerHTML = `<span>Intercept</span> <i class="ph-bold ph-shield-check"></i>`;
-                UI.elems.sendBtn.style.background = 'white';
-                UI.elems.sendBtn.style.color = '#94a3b8';
-                UI.elems.sendBtn.style.cursor = 'not-allowed';
-                UI.elems.msgBox.innerHTML = '';
-                UI.elems.msgBox.classList.add('typing-cursor');
-                UI.elems.status.innerText = "BOSS TYPING...";
-                UI.elems.status.classList.add('animate-pulse');
-                this.isTyping = true;
-                const words = msg.text.split(/(\s+)/);
-                let wordIndex = 0;
-                const speed = 50; 
-                if (this.typeLoop) clearInterval(this.typeLoop);
-                this.typeLoop = setInterval(() => {
-                    if (!this.state.active) return clearInterval(this.typeLoop);
-                    if (wordIndex < words.length) {
-                        const w = words[wordIndex];
-                        const span = document.createElement('span');
-                        span.innerText = w;
-                        const clean = w.trim().replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g,"");
-                        const err = msg.mistakes.find(m => m.o === clean);
-                        if (err && w.trim().length > 0) {
-                            this.mistakeCount++;
-                            span.className = 'mistake-word';
-                            span.onclick = (e) => this.showPopup(e, span, err);
-                        }
-                        UI.elems.msgBox.appendChild(span);
-                        UI.elems.chatArea.scrollTop = UI.elems.chatArea.scrollHeight;
-                        if (w.trim().length > 0) AudioSys.playClick();
-                        wordIndex++;
-                    } else {
-                        clearInterval(this.typeLoop);
-                        this.isTyping = false;
-                        UI.elems.msgBox.classList.remove('typing-cursor');
-                        UI.elems.status.innerText = "Drafting paused";
-                        UI.elems.status.classList.remove('animate-pulse');
-                    }
-                }, speed);
-            },
+
             showPopup(e, span, err) {
+                if(this.state.paused) return;
                 e.stopPropagation();
                 if(span.classList.contains('word-fixed')) return;
                 AudioSys.playTone('sine', 400, 0.1);
@@ -389,7 +545,7 @@
                 });
                 pop.classList.remove('hidden');
                 const rect = span.getBoundingClientRect();
-                const container = document.getElementById('game-screen').getBoundingClientRect();
+                const container = document.getElementById('screen-game').getBoundingClientRect();
                 let left = rect.left - container.left;
                 let top = rect.top - container.top - 120;
                 if(left < 10) left = 10;
@@ -399,35 +555,66 @@
                 pop.style.top = top + 'px';
                 setTimeout(() => document.addEventListener('click', () => pop.classList.add('hidden'), {once:true}), 10);
             },
+
             completeMsg() {
+                // Get the fixed text content
+                const fixedText = UI.elems.msgBox.innerText;
+
                 this.state.score += 500;
                 this.state.msgs++;
-                this.state.time = Math.min(20, this.state.time + 5);
+                // Removed time bonus per user request
+                // this.state.time = Math.min(this.state.initialTime, this.state.time + 5);
                 AudioSys.playTone('triangle', 600, 0.1);
                 Boss.state('success');
+                
+                // Visual feedback
                 UI.elems.sendBtn.style.background = 'var(--accent)';
                 UI.elems.sendBtn.style.color = 'white';
                 UI.elems.sendBtn.innerHTML = `<span>SAFE!</span> <i class="ph-bold ph-check"></i>`;
                 UI.elems.feedback.classList.remove('opacity-0', 'scale-50');
                 UI.elems.feedback.classList.add('opacity-100', 'scale-100', 'rotate-[-6deg]');
+                
                 setTimeout(() => {
+                    // Commit to chat history
+                    this.addChatBubble(fixedText, 'sent');
+                    
+                    // Reset UI
+                    UI.elems.msgBox.innerHTML = '';
+                    UI.elems.msgBox.classList.remove('active');
                     UI.elems.feedback.classList.remove('opacity-100', 'scale-100', 'rotate-[-6deg]');
                     UI.elems.feedback.classList.add('opacity-0', 'scale-50');
-                    if (this.state.active) this.nextMsg();
-                }, 1200);
+                    
+                    // Next
+                    this.state.msgIndex++;
+                    if (this.state.active && !this.state.paused) this.processNextMsg();
+                }, 1000);
             },
-            end() {
+
+            endGameLogic() {
                 this.state.active = false;
-                clearInterval(this.loop);
-                clearInterval(this.typeLoop);
-                Boss.state('angry'); 
-                UI.showScreen('result');
+                if(this.loop) clearInterval(this.loop);
+                if(this.typeLoop) clearInterval(this.typeLoop);
+                AudioSys.stopMusic();
+                Boss.state('angry');
+            },
+
+            end() {
+                this.endGameLogic();
+                UI.showScreen('screen-result');
                 const s = this.state.score;
+                
+                // SCORING ADJUSTMENT: Scale criteria based on duration
+                // Base thresholds are calibrated for 20s.
+                // Multiplier = initialTime / 20.
+                const multiplier = this.state.initialTime / 20;
+
                 let grade = 'F', title = 'Disaster', icon = '💀';
-                if(s > 5000) { grade = 'S'; title = 'Godlike'; icon = '👑'; }
-                else if(s > 3000) { grade = 'A'; title = 'Promoted'; icon = '🔥'; }
-                else if(s > 1500) { grade = 'B'; title = 'Passable'; icon = '👍'; }
-                else if(s > 500) { grade = 'C'; title = 'Risky'; icon = '😬'; }
+                
+                if(s > 5000 * multiplier) { grade = 'S'; title = 'Godlike'; icon = '👑'; }
+                else if(s > 3000 * multiplier) { grade = 'A'; title = 'Promoted'; icon = '🔥'; }
+                else if(s > 1500 * multiplier) { grade = 'B'; title = 'Passable'; icon = '👍'; }
+                else if(s > 500 * multiplier) { grade = 'C'; title = 'Risky'; icon = '😬'; }
+                
                 document.getElementById('rank-grade').innerText = grade;
                 document.getElementById('rank-title').innerText = title;
                 document.getElementById('rank-icon').innerText = icon;
