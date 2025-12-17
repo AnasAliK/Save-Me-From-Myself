@@ -1,4 +1,5 @@
 
+        
         :root {
             /* Default variables */
             --app-bg: #f5f5f5;
@@ -482,4 +483,495 @@
             .world-scene { height: 200px; width: 100%; margin-right: 0; margin-top: 1rem; flex: none; }
             .boss-container { transform: scale(0.5); transform-origin: bottom center; }
             .device-frame { height: 60vh; }
+        }
+        @media (max-width: 768px) {
+            body { padding: 0; margin: 0; }
+            
+            /* Fullscreen menu adjustments */
+            .fullscreen-pane {
+                padding: 1.5rem;
+            }
+            
+            .fullscreen-pane .title-text {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+            }
+            
+            .fullscreen-pane h1 {
+                font-size: 3rem;
+            }
+            
+            .fullscreen-pane h2 {
+                font-size: 2.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .fullscreen-pane .menu-card {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .fullscreen-pane .btn-primary {
+                padding: 1.25rem;
+                font-size: 1.25rem;
+            }
+            
+            /* Time select grid */
+            #screen-time .grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            #screen-time .btn-option {
+                padding: 1.5rem;
+                font-size: 2rem;
+            }
+            
+            /* Character select grid */
+            #screen-char .grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            #screen-char .char-select-card {
+                padding: 1.5rem;
+            }
+            
+            #screen-char .char-icon-bg {
+                width: 4rem;
+                height: 4rem;
+                font-size: 2rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            #screen-char .char-select-card span {
+                font-size: 1rem;
+            }
+            
+            #screen-char .char-select-card p {
+                font-size: 0.75rem;
+                margin-top: 0.5rem;
+            }
+            
+            #screen-char .btn-primary {
+                width: 100%;
+                padding: 1.25rem;
+                font-size: 1.25rem;
+            }
+            
+            #screen-char p {
+                font-size: 1.25rem;
+            }
+            
+            /* Result screen adjustments */
+            #screen-result {
+                padding: 1rem;
+            }
+            
+            #rank-card {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            #rank-icon {
+                width: 4rem;
+                height: 4rem;
+                font-size: 2.5rem;
+            }
+            
+            #rank-grade {
+                font-size: 3.5rem;
+            }
+            
+            #rank-title {
+                font-size: 1rem;
+            }
+            
+            #final-score, #final-count {
+                font-size: 1.75rem;
+            }
+            
+            #radar-chart {
+                width: 240px;
+                height: 240px;
+            }
+            
+            /* Game layout */
+            #game-layout-container {
+                padding: 0;
+                max-width: 100%;
+                align-items: stretch;
+                justify-content: stretch;
+            }
+            
+            #game-layout-container.visible { 
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 0;
+            }
+            
+            /* Phone fills entire screen */
+            .device-frame { 
+                width: 100%;
+                max-width: 100%;
+                height: 100vh;
+                max-height: 100vh;
+                box-shadow: none;
+                border-radius: 0;
+                border: none;
+                flex-shrink: 0;
+            }
+            
+            .device-notch {
+                display: block;
+            }
+            
+            /* Character scene as floating overlay - using scale transform */
+            .world-scene { 
+                position: fixed;
+                top: 70px;
+                right: 12px;
+                width: 500px;
+                height: 500px;
+                margin: 0;
+                z-index: 999;
+                border-radius: 16px;
+                border: 3px solid #1e293b;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                transform: scale(0.28);
+                transform-origin: top right;
+            }
+            
+            .cam-ui {
+                font-size: 10px;
+                top: 15px;
+                left: 15px;
+            }
+            
+            /* Keep all elements at original size/position, scene will scale */
+            .boss-container { 
+                transform: scale(0.95) translateY(20px);
+            }
+            
+            /* Background elements remain at desktop sizes */
+            .office-window {
+                width: 140px;
+                height: 180px;
+                top: 40px;
+                left: 40px;
+            }
+            
+            .city-skyline {
+                height: 40%;
+            }
+            
+            .office-bookshelf {
+                width: 100px;
+                height: 220px;
+                top: 60px;
+                right: 40px;
+            }
+            
+            .shelf-row {
+                height: 25%;
+            }
+            
+            .book {
+                width: 10px;
+            }
+            
+            .office-painting {
+                width: 140px;
+                height: 90px;
+                top: 60px;
+            }
+            
+            .prop-lockers {
+                width: 220px;
+                height: 260px;
+                top: 40px;
+                left: 20px;
+            }
+            
+            .locker::after {
+                width: 4px;
+                height: 20px;
+                top: 30px;
+                right: 5px;
+            }
+            
+            .locker::before {
+                top: 10px;
+                left: 20%;
+                width: 60%;
+                height: 5px;
+            }
+            
+            .prop-poster {
+                width: 90px;
+                height: 130px;
+                top: 60px;
+                right: 60px;
+            }
+            
+            .prop-poster.kid::after {
+                font-size: 40px;
+            }
+            
+            .prop-poster.gym {
+                font-size: 10px;
+            }
+            
+            .prop-leds {
+                height: 6px;
+            }
+            
+            .prop-skateboard {
+                width: 40px;
+                height: 120px;
+                bottom: 120px;
+                right: 60px;
+            }
+            
+            .prop-skateboard::after {
+                width: 30px;
+                height: 30px;
+                top: 10px;
+            }
+            
+            .prop-mess {
+                width: 100px;
+                height: 60px;
+                bottom: 60px;
+                left: 40px;
+            }
+            
+            .prop-mess::before {
+                width: 50px;
+                height: 30px;
+            }
+            
+            .prop-mess::after {
+                width: 40px;
+                height: 40px;
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .prop-plant {
+                width: 60px;
+                height: 120px;
+                top: -10px;
+                left: 20px;
+            }
+            
+            .prop-plant::before {
+                width: 2px;
+                height: 40px;
+            }
+            
+            .prop-plant .pot {
+                width: 40px;
+                height: 30px;
+                top: 40px;
+                left: 10px;
+            }
+            
+            .prop-plant .leaves {
+                top: 50px;
+                height: 70px;
+            }
+            
+            .prop-neon {
+                font-size: 32px;
+                top: 60px;
+                right: 40px;
+            }
+            
+            .prop-menu {
+                width: 120px;
+                height: 140px;
+                top: 100px;
+                left: calc(50% - 250px);
+            }
+            
+            .prop-menu::after {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+            
+            /* Desk remains full size */
+            .desk {
+                width: 140%;
+                height: 400px;
+                bottom: -320px;
+            }
+            
+            .desk-front {
+                height: 50px;
+                bottom: -50px;
+            }
+            
+            .desk-upper-slab {
+                height: 60px;
+                top: 20px;
+            }
+            
+            .desk-mat {
+                width: 60%;
+                height: 200px;
+                top: 100px;
+            }
+            
+            .prop-nameplate {
+                width: 120px;
+                height: 35px;
+                font-size: 11px;
+            }
+            
+            .prop-mug {
+                width: 35px;
+                height: 35px;
+                margin-left: 20px;
+            }
+            
+            .prop-shaker {
+                width: 40px;
+                height: 60px;
+                top: -30px;
+            }
+            
+            .prop-shaker::after {
+                width: 44px;
+                height: 10px;
+                top: -10px;
+                left: -2px;
+            }
+            
+            .prop-controller {
+                width: 70px;
+                height: 45px;
+                top: 20px;
+            }
+            
+            .prop-controller::before {
+                width: 18px;
+                height: 18px;
+                top: 12px;
+                left: 8px;
+            }
+            
+            .prop-controller::after {
+                width: 8px;
+                height: 8px;
+                top: 10px;
+                right: 10px;
+            }
+            
+            .prop-latte {
+                width: 40px;
+                height: 50px;
+                top: -10px;
+            }
+            
+            .prop-latte::before {
+                width: 46px;
+                height: 6px;
+                top: -6px;
+                left: -3px;
+            }
+            
+            .prop-latte::after {
+                font-size: 20px;
+                top: 10px;
+                left: 8px;
+            }
+            
+            /* Character elements */
+            .head {
+                width: 100px;
+                height: 110px;
+            }
+            
+            .body {
+                width: 160px;
+                height: 140px;
+            }
+            
+            .shirt {
+                width: 40px;
+                height: 100px;
+            }
+            
+            .arm {
+                width: 35px;
+                height: 110px;
+            }
+            
+            .hand {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .glasses {
+                width: 80px;
+                height: 26px;
+            }
+            
+            .glasses::before, .glasses::after {
+                width: 32px;
+                height: 26px;
+                border: 4px solid #1e293b;
+            }
+            
+            .tie {
+                width: 20px;
+                height: 80px;
+            }
+            
+            .cap {
+                width: 110px;
+                height: 40px;
+            }
+            
+            .cap::before {
+                width: 60px;
+                height: 10px;
+            }
+            
+            .headband {
+                width: 100px;
+                height: 15px;
+            }
+            
+            .hair-long {
+                width: 140px;
+                height: 160px;
+            }
+            
+            .hair-bangs {
+                width: 100px;
+                height: 60px;
+            }
+            
+            .necklace {
+                width: 60px;
+                height: 60px;
+                border: 4px solid #fbbf24;
+            }
+            
+            .boss-phone {
+                width: 65px;
+                height: 100px;
+            }
+            
+            .boss-phone::before {
+                width: 55px;
+                height: 85px;
+            }
+            .world-hidden {
+               display: none !important;
+            }
         }

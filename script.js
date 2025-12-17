@@ -198,6 +198,7 @@
         };
 
         // --- GAME LOGIC ---
+        //showWorldScene();
         const AudioSys = {
             ctx: null, isMuted: false, musicTimer: null,
             init() { if(!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); },
@@ -271,6 +272,7 @@
                     this.layout.classList.add('visible');
                     Object.values(this.screens).forEach(s => { if(s && s.classList.contains('fullscreen-pane')) s.classList.remove('active'); });
                     ['game', 'result'].forEach(k => { if(this.screens[k]) this.screens[k].classList.remove('active'); });
+                    //hideWorldScene();
                     if(key !== 'pause') this.screens.pause.classList.add('hidden');
                     if (this.screens[key]) this.screens[key].classList.add('active');
                 }
@@ -364,6 +366,7 @@
             },
 
             startGame() {
+                showWorldScene();
                 AudioSys.playClick();
                 
                 const char = CHARACTERS[this.state.currentCharId];
@@ -509,7 +512,8 @@
             
             end() { 
                 this.endGameLogic(); 
-                UI.showScreen('screen-result'); 
+                UI.showScreen('screen-result');
+                hideWorldScene(); 
                 const s = this.state.score; 
                 const multiplier = this.state.initialTime / 20; 
                 let grade = 'F', title = 'Disaster', icon = '💀'; 
@@ -689,3 +693,12 @@
                 document.getElementById('radar-feedback').innerText = feedback;
             }
         };
+function hideWorldScene() {
+    const scene = document.getElementById("game-scene");
+    if (scene) scene.classList.add("world-hidden");
+}
+
+function showWorldScene() {
+    const scene = document.getElementById("game-scene");
+    if (scene) scene.classList.remove("world-hidden");
+}
