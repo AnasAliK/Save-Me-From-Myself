@@ -1,6 +1,6 @@
 # **GAME DESIGN DOCUMENT (GDD)**
 
-## **Game Title (Working Title): *Save Me From Myself***
+## **Game Title (Working Title): *Typo Panic***
 
 **Genre:** Fast-paced Text Puzzle / Humor
 **Platform:** Web (HTML5, itch.io)
