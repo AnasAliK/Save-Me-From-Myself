@@ -10,18 +10,15 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&family=Lato:wght@400;700&family=Comic+Neue:wght@700&family=Yellowtail&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css" />
-
+    
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <!-- MENUS & GAME UI -->
     <!-- 1. MAIN MENU -->
     <div id="screen-menu" class="fullscreen-pane active">
         <div class="relative z-10 text-center max-w-lg w-full flex flex-col items-center">
-            <div class="mb-12 relative animate-float-slow">
-                <div class="w-40 h-40 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl rotate-3 shadow-2xl flex items-center justify-center text-white text-7xl ring-8 ring-white/10 backdrop-blur"><i class="ph-fill ph-shield-check"></i></div>
-            </div>
+            <div class="mb-12 relative animate-float-slow"><div class="w-40 h-40 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl rotate-3 shadow-2xl flex items-center justify-center text-white text-7xl ring-8 ring-white/10 backdrop-blur"><i class="ph-fill ph-shield-check"></i></div></div>
             <h1 class="text-7xl font-black title-text mb-4 tracking-tight drop-shadow-lg">Save Me<br><span class="text-white">From Myself</span></h1>
             <div class="menu-card p-8 rounded-3xl mb-12 w-full max-w-md text-left transform hover:scale-[1.02] transition-transform">
                 <p class="text-xs font-bold text-blue-300 uppercase tracking-widest mb-3">Mission Briefing</p>
@@ -49,30 +46,20 @@
         <div class="max-w-6xl w-full text-center">
             <h2 class="text-6xl font-black text-white mb-4 title-text">Select Client</h2>
             <p class="text-slate-400 text-2xl mb-12">Who needs saving today?</p>
-            
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 w-full mb-16">
                 <div onclick="Game.selectChar('boss')" id="char-card-boss" class="char-select-card rounded-3xl p-8 flex flex-col items-center selected">
-                    <div class="char-icon-bg w-32 h-32 rounded-full bg-blue-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">👨‍💼</div>
-                    <span class="font-bold text-white text-2xl">The Boss</span>
-                    <p class="text-slate-300 text-sm mt-3 font-medium">Drunk texting staff.</p>
+                    <div class="char-icon-bg w-32 h-32 rounded-full bg-blue-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">👨‍💼</div><span class="font-bold text-white text-2xl">The Boss</span><p class="text-slate-300 text-sm mt-3 font-medium">Drunk texting staff.</p>
                 </div>
                 <div onclick="Game.selectChar('sportsman')" id="char-card-sportsman" class="char-select-card rounded-3xl p-8 flex flex-col items-center">
-                    <div class="char-icon-bg w-32 h-32 rounded-full bg-red-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">🏋️</div>
-                    <span class="font-bold text-white text-2xl">Gym Bro</span>
-                    <p class="text-slate-300 text-sm mt-3 font-medium">Too pumped to spell.</p>
+                    <div class="char-icon-bg w-32 h-32 rounded-full bg-red-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">🏋️</div><span class="font-bold text-white text-2xl">Gym Bro</span><p class="text-slate-300 text-sm mt-3 font-medium">Too pumped to spell.</p>
                 </div>
                 <div onclick="Game.selectChar('kid')" id="char-card-kid" class="char-select-card rounded-3xl p-8 flex flex-col items-center">
-                    <div class="char-icon-bg w-32 h-32 rounded-full bg-green-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">🧢</div>
-                    <span class="font-bold text-white text-2xl">The Kid</span>
-                    <p class="text-slate-300 text-sm mt-3 font-medium">Pranking for V-Bucks.</p>
+                    <div class="char-icon-bg w-32 h-32 rounded-full bg-green-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">🧢</div><span class="font-bold text-white text-2xl">The Kid</span><p class="text-slate-300 text-sm mt-3 font-medium">Pranking for V-Bucks.</p>
                 </div>
                 <div onclick="Game.selectChar('girl')" id="char-card-girl" class="char-select-card rounded-3xl p-8 flex flex-col items-center">
-                    <div class="char-icon-bg w-32 h-32 rounded-full bg-pink-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">💇‍♀️</div>
-                    <span class="font-bold text-white text-2xl">Sophie</span>
-                    <p class="text-slate-300 text-sm mt-3 font-medium">Gossiping at 100mph.</p>
+                    <div class="char-icon-bg w-32 h-32 rounded-full bg-pink-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">💇‍♀️</div><span class="font-bold text-white text-2xl">Sophie</span><p class="text-slate-300 text-sm mt-3 font-medium">Gossiping at 100mph.</p>
                 </div>
             </div>
-            
             <button onclick="Game.startGame()" class="btn-primary w-full md:w-[500px] py-6 rounded-2xl font-black text-2xl text-white shadow-2xl tracking-widest">START ASSIGNMENT</button>
             <div class="mt-8"><button onclick="Game.goToTimeSelect()" class="text-slate-400 hover:text-white text-xl font-bold underline transition-colors">Back</button></div>
         </div>
@@ -83,32 +70,24 @@
         <div class="world-scene" id="game-scene">
             <div class="cam-ui"><span class="rec-dot"></span>CAM 04 [LIVE]</div>
             
-            <!-- BACKGROUND PROPS -->
             <div class="bg-prop office-window" id="prop-window"><div class="city-skyline"></div><div class="window-reflection"></div><div class="blind-slats"></div></div>
             <div class="bg-prop office-bookshelf" id="prop-shelf"><div class="shelf-row"><div class="book" style="height:80%;background:#ef4444"></div></div><div class="shelf-row"></div></div>
             <div class="bg-prop office-painting" id="prop-painting"><div class="art-canvas"></div></div>
-            
             <div class="bg-prop prop-lockers flex" id="prop-lockers"><div class="locker"></div><div class="locker"></div><div class="locker"></div></div>
             <div class="bg-prop prop-brick" id="prop-brick"></div>
             <div class="bg-prop prop-poster" id="prop-poster"></div>
-            
-            <!-- NEW KID/SOPHIE PROPS -->
             <div class="bg-prop prop-leds" id="prop-leds"></div>
             <div class="bg-prop prop-skateboard" id="prop-skateboard"></div>
             <div class="bg-prop prop-plant" id="prop-plant"><div class="pot"></div><div class="leaves"></div></div>
             <div class="bg-prop prop-neon" id="prop-neon">VIBES</div>
-            <div class="bg-prop prop-menu flex" id="prop-menu"></div> <!-- Added flex here -->
+            <div class="bg-prop prop-menu flex" id="prop-menu"></div>
             <div class="bg-prop prop-mess" id="prop-mess"></div>
 
-
-            <!-- CHARACTER -->
             <div id="boss" class="boss-container">
                 <div class="head"></div>
                 <div class="glasses" id="char-glasses"></div><div class="cap" id="char-cap"></div><div class="headband" id="char-headband"></div><div class="hair-long" id="char-hair"></div><div class="hair-bangs" id="char-bangs"></div>
                 <div class="body"></div><div class="shirt"></div><div class="tie" id="char-tie"></div><div class="necklace" id="char-necklace"></div>
                 <div class="boss-phone"></div><div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-                
-                <!-- DESK -->
                 <div class="desk">
                     <div class="desk-front"></div>
                     <div class="desk-upper-slab" id="prop-slab">
@@ -123,7 +102,6 @@
             </div>
         </div>
 
-        <!-- DEVICE FRAME -->
         <div class="device-frame">
             <div class="device-notch"></div>
             <div id="screen-game" class="screen app-view relative">
@@ -155,19 +133,49 @@
                 <button onclick="Game.quitToMenu()" class="w-48 bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl">MAIN MENU</button>
             </div>
 
-            <div id="screen-result" class="screen bg-white/90 backdrop-blur-sm items-center justify-center p-6 text-center z-30">
-                <div id="rank-card" class="bg-white w-full rounded-3xl shadow-xl p-8 mb-6 border border-slate-200 transform transition-all hover:scale-105 duration-500">
-                    <div class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Performance Review</div>
-                    <div id="rank-icon" class="w-32 h-32 mx-auto rounded-full bg-slate-100 flex items-center justify-center text-7xl mb-4 shadow-inner">😐</div>
-                    <h2 id="rank-grade" class="text-6xl font-black text-slate-800 mb-2">B-</h2>
-                    <h3 id="rank-title" class="text-xl font-bold text-blue-600 mb-4">Mediocre Typer</h3>
-                    <div class="grid grid-cols-2 gap-4 border-t border-slate-100 pt-6">
-                        <div><div class="text-2xl font-black text-slate-800" id="final-score">0</div><div class="text-xs text-slate-400 uppercase font-bold">Score</div></div>
-                        <div><div class="text-2xl font-black text-slate-800" id="final-count">0</div><div class="text-xs text-slate-400 uppercase font-bold">Msgs Saved</div></div>
+            <div id="screen-result" class="screen bg-white/90 backdrop-blur-sm items-center justify-start p-6 text-center z-30 overflow-y-auto">
+                <div class="flex flex-col items-center w-full max-w-lg py-10">
+                    <div id="rank-card" class="w-full rounded-3xl p-8 mb-6 border border-slate-200 transform transition-all hover:scale-105 duration-500 bg-white shadow-xl">
+                        <div class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Performance Evaluation</div>
+                        <div class="flex items-center justify-center gap-6 mb-6">
+                            <div id="rank-icon" class="w-24 h-24 rounded-2xl bg-slate-50 border-2 border-slate-100 flex items-center justify-center text-6xl shadow-inner">😐</div>
+                            <div class="text-left">
+                                <h2 id="rank-grade" class="text-7xl font-black leading-none mb-1 text-slate-800">B-</h2>
+                                <h3 id="rank-title" class="text-lg font-bold text-slate-500">Mediocre Typer</h3>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 border-t border-slate-100 pt-6">
+                            <div class="bg-slate-50 rounded-xl p-3">
+                                <div class="text-3xl font-black text-slate-800" id="final-score">0</div>
+                                <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Total Score</div>
+                            </div>
+                            <div class="bg-slate-50 rounded-xl p-3">
+                                <div class="text-3xl font-black text-slate-800" id="final-count">0</div>
+                                <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Saved</div>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <!-- RADAR CHART -->
+                    <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-lg p-6 mb-6 w-full flex flex-col items-center border border-white/50">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Metrics Analysis</h3>
+                        <div class="relative w-full flex justify-center">
+                            <canvas id="radar-chart" width="280" height="280"></canvas>
+                        </div>
+                        <p id="radar-feedback" class="mt-4 text-center text-sm font-medium text-slate-600 italic px-4 bg-slate-50 py-2 rounded-lg w-full mb-4"></p>
+                        
+                        <!-- HISTORY COMPARISON -->
+                        <div id="history-section" class="w-full border-t border-slate-100 pt-4 hidden">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 text-left">Trend (vs Previous)</h4>
+                            <div id="history-content" class="text-sm text-left space-y-1 text-slate-600">
+                                <!-- Injected via JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="Game.goToTimeSelect()" class="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold text-lg shadow-xl shadow-slate-900/20 hover:bg-slate-800 transition-all hover:scale-[1.02] mb-3">Next Shift</button>
+                    <button onclick="Game.quitToMenu()" class="text-slate-400 hover:text-slate-600 font-bold text-sm transition-colors mb-8">Return to Menu</button>
                 </div>
-                <button onclick="Game.goToTimeSelect()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold text-lg shadow-lg hover:bg-blue-500 transition-colors">New Job</button>
-                <button onclick="Game.quitToMenu()" class="mt-4 text-slate-400 font-bold text-sm">Main Menu</button>
             </div>
         </div>
     </div>

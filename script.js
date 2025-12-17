@@ -8,6 +8,9 @@
             tinder: { appBg: '#ffffff', headerBg: 'linear-gradient(to right, #fd267a, #ff6036)', headerText: '#ffffff', bubbleBg: '#fd267a', bubbleText: '#ffffff', bubbleRecvBg: '#f0f2f4', bubbleRecvText: '#111', accent: '#fd267a', fixedText: '#ffffff', radius: '1.5rem', font: "'Inter', sans-serif", icon: 'ph-fire-fill', pattern: 'grid', footerBg: '#ffffff' }
         };
 
+        // --- HISTORY MANAGER ---
+
+
         const CONVERSATIONS_DATA = {
             boss: {
                 whatsapp: [
@@ -173,7 +176,7 @@
                 apps: ['whatsapp'], 
                 theme: 'cafe',
                 colors: { skin: '#fecaca', shirt: '#f472b6', tie: 'transparent', suit: '#fff1f2' },
-                props: ['char-hair', 'char-necklace', 'prop-latte', 'prop-brick', 'char-bangs', 'prop-plant', 'prop-neon', 'prop-menu'] /* Removed prop-window */
+                props: ['char-hair', 'char-necklace', 'prop-latte', 'prop-brick', 'char-bangs', 'prop-plant', 'prop-neon', 'prop-menu']
             }
         };
 
@@ -269,8 +272,33 @@
             }
         };
 
+        // --- HISTORY MANAGER ---
+        const HistoryManager = {
+            key: 'saveMeRunHistory_v2',
+            get() {
+                try { return JSON.parse(localStorage.getItem(this.key)) || []; } 
+                catch(e) { return []; }
+            },
+            add(runData) {
+                const history = this.get();
+                history.push(runData);
+                // Keep last 3 runs
+                if (history.length > 3) history.shift();
+                localStorage.setItem(this.key, JSON.stringify(history));
+            },
+            getLast() {
+                const h = this.get();
+                return h.length > 0 ? h[h.length - 1] : null;
+            }
+        };
+
         const Game = {
-            state: { score: 0, msgs: 0, time: 20, initialTime: 20, active: false, paused: false, conversation: [], msgIndex: 0, currentCharId: 'boss', playedConvos: [] },
+            state: { 
+                score: 0, msgs: 0, time: 20, initialTime: 20, active: false, paused: false, 
+                conversation: [], msgIndex: 0, currentCharId: 'boss', playedConvos: [],
+                // New Metric Props
+                correctClicks: 0, wrongClicks: 0, startTime: 0, clickHistory: [], pressureClicks: 0, pressureCorrect: 0
+            },
             loop: null, typeLoop: null, currentMsg: null, mistakeCount: 0, mistakesFixed: 0, isTyping: false,
             
             goToTimeSelect() { AudioSys.init(); AudioSys.playClick(); if(AudioSys.ctx.state === 'suspended') AudioSys.ctx.resume(); UI.showScreen('screen-time'); },
@@ -344,7 +372,6 @@
                 Boss.setColors(char.colors);
                 Boss.setProps(char.props);
 
-                // --- NEW SELECTION LOGIC ---
                 const charConvoData = CONVERSATIONS_DATA[char.id];
                 const availableApps = char.apps.filter(app => charConvoData[app]);
                 const selectedApp = availableApps[Math.floor(Math.random() * availableApps.length)];
@@ -370,7 +397,11 @@
                     active: true, paused: false,
                     currentCharId: this.state.currentCharId,
                     conversation: selectedConvo.msgs,
-                    msgIndex: 0
+                    msgIndex: 0,
+                    // Reset Metrics
+                    correctClicks: 0, wrongClicks: 0, startTime: Date.now(), 
+                    clickHistory: [], pressureClicks: 0, pressureCorrect: 0,
+                    totalMsgsInConvo: selectedConvo.msgs.length
                 };
                 
                 const spacer = document.createElement('div'); spacer.className = "flex-1";
@@ -429,7 +460,6 @@
                     Boss.state('angry'); 
                     UI.elems.sendBtn.classList.add('animate-shake'); 
                     UI.elems.sendBtn.style.color = '#ef4444'; 
-                    // Dynamic Gender Pronoun
                     const pronoun = this.state.currentCharId === 'girl' ? "SHE'S" : "HE'S";
                     UI.elems.sendBtn.innerText = `${pronoun} GONNA SEND IT!`; 
                 } else { 
@@ -439,7 +469,41 @@
                 if (this.state.time <= 0) this.end(); 
             },
 
-            showPopup(e, span, err) { if(this.state.paused) return; e.stopPropagation(); if(span.classList.contains('word-fixed')) return; AudioSys.playTone('sine', 400, 0.1); const pop = UI.elems.popup; pop.innerHTML = ''; [...err.l].sort(()=>Math.random()-.5).forEach(opt => { const btn = document.createElement('button'); btn.className = "w-full text-left px-4 py-3 hover:bg-slate-100 text-slate-800 text-sm font-semibold border-b border-slate-100 last:border-0"; btn.innerText = opt; btn.onclick = () => { if(opt === err.c) { AudioSys.playTone('sine', 800, 0.1); const original = span.innerText; const prefix = original.match(/^\W*/)[0] || ''; const suffix = original.match(/\W*$/)[0] || ''; span.innerText = prefix + opt + suffix; span.className = 'word-fixed'; this.state.score += 100; UI.elems.score.innerText = this.state.score; this.mistakesFixed++; if (this.mistakesFixed >= this.mistakeCount && !this.isTyping) { this.completeMsg(); } } else { AudioSys.playTone('sawtooth', 150, 0.2); this.state.score = Math.max(0, this.state.score - 50); UI.elems.score.innerText = this.state.score; span.classList.add('animate-shake'); setTimeout(()=>span.classList.remove('animate-shake'), 300); } pop.classList.add('hidden'); }; pop.appendChild(btn); }); pop.classList.remove('hidden'); const rect = span.getBoundingClientRect(); const container = document.getElementById('screen-game').getBoundingClientRect(); let left = rect.left - container.left; let top = rect.top - container.top - 120; if(left < 10) left = 10; if(left > container.width - 150) left = container.width - 150; if(top < 60) top = rect.bottom - container.top + 10; pop.style.left = left + 'px'; pop.style.top = top + 'px'; setTimeout(() => document.addEventListener('click', () => pop.classList.add('hidden'), {once:true}), 10); },
+            showPopup(e, span, err) { 
+                if(this.state.paused) return; e.stopPropagation(); 
+                if(span.classList.contains('word-fixed')) return; 
+                AudioSys.playTone('sine', 400, 0.1); 
+                const pop = UI.elems.popup; pop.innerHTML = ''; 
+                
+                [...err.l].sort(()=>Math.random()-.5).forEach(opt => { 
+                    const btn = document.createElement('button'); 
+                    btn.className = "w-full text-left px-4 py-3 hover:bg-slate-100 text-slate-800 text-sm font-semibold border-b border-slate-100 last:border-0"; 
+                    btn.innerText = opt; 
+                    btn.onclick = () => { 
+                        // Metric Recording
+                        const now = Date.now();
+                        const isLowTime = this.state.time <= 5; 
+                        this.state.clickHistory.push({ time: now, correct: opt === err.c });
+                        if(isLowTime) this.state.pressureClicks++;
+
+                        if(opt === err.c) { 
+                            this.state.correctClicks++;
+                            if(isLowTime) this.state.pressureCorrect++;
+                            AudioSys.playTone('sine', 800, 0.1); 
+                            const original = span.innerText; const prefix = original.match(/^\W*/)[0] || ''; const suffix = original.match(/\W*$/)[0] || ''; span.innerText = prefix + opt + suffix; span.className = 'word-fixed'; this.state.score += 100; UI.elems.score.innerText = this.state.score; this.mistakesFixed++; if (this.mistakesFixed >= this.mistakeCount && !this.isTyping) { this.completeMsg(); } 
+                        } else { 
+                            this.state.wrongClicks++;
+                            AudioSys.playTone('sawtooth', 150, 0.2); 
+                            this.state.score = Math.max(0, this.state.score - 50); UI.elems.score.innerText = this.state.score; span.classList.add('animate-shake'); setTimeout(()=>span.classList.remove('animate-shake'), 300); 
+                        } 
+                        pop.classList.add('hidden'); 
+                    }; 
+                    pop.appendChild(btn); 
+                }); 
+                pop.classList.remove('hidden'); 
+                const rect = span.getBoundingClientRect(); const container = document.getElementById('screen-game').getBoundingClientRect(); let left = rect.left - container.left; let top = rect.top - container.top - 120; if(left < 10) left = 10; if(left > container.width - 150) left = container.width - 150; if(top < 60) top = rect.bottom - container.top + 10; pop.style.left = left + 'px'; pop.style.top = top + 'px'; setTimeout(() => document.addEventListener('click', () => pop.classList.add('hidden'), {once:true}), 10); 
+            },
+            
             completeMsg() { const fixedText = UI.elems.msgBox.innerText; this.state.score += 500; this.state.msgs++; AudioSys.playTone('triangle', 600, 0.1); Boss.state('success'); UI.elems.sendBtn.style.background = 'var(--accent)'; UI.elems.sendBtn.style.color = 'white'; UI.elems.sendBtn.innerHTML = `<span>SAFE!</span> <i class="ph-bold ph-check"></i>`; UI.elems.feedback.classList.remove('opacity-0', 'scale-50'); UI.elems.feedback.classList.add('opacity-100', 'scale-100', 'rotate-[-6deg]'); setTimeout(() => { this.addChatBubble(fixedText, 'sent'); UI.elems.msgBox.innerHTML = ''; UI.elems.msgBox.classList.remove('active'); UI.elems.feedback.classList.remove('opacity-100', 'scale-100', 'rotate-[-6deg]'); UI.elems.feedback.classList.add('opacity-0', 'scale-50'); this.state.msgIndex++; if (this.state.active && !this.state.paused) this.processNextMsg(); }, 1000); },
             endGameLogic() { this.state.active = false; if(this.loop) clearInterval(this.loop); if(this.typeLoop) clearInterval(this.typeLoop); AudioSys.stopMusic(); Boss.state('angry'); },
             
@@ -460,5 +524,168 @@
                 document.getElementById('rank-icon').innerText = icon; 
                 document.getElementById('final-score').innerText = s; 
                 document.getElementById('final-count').innerText = this.state.msgs; 
+
+                // --- RADAR GRAPH CALCULATIONS ---
+                const totalClicks = this.state.correctClicks + this.state.wrongClicks;
+                const timeElapsed = (Date.now() - this.state.startTime) / 1000;
+
+                // 1. Precision (0-100)
+                const precision = totalClicks > 0 ? (this.state.correctClicks / totalClicks) * 100 : 0;
+
+                // 2. Velocity (Clicks per second normalized to 100, target 1.5 clicks/sec)
+                const speedRaw = totalClicks / (timeElapsed || 1);
+                const velocity = Math.min(100, (speedRaw / 1.5) * 100);
+
+                // 3. Efficiency (Score per second, normalized to target 150 score/sec)
+                const efficiencyRaw = s / (timeElapsed || 1);
+                const efficiency = Math.min(100, (efficiencyRaw / 150) * 100);
+
+                // 4. Consistency (Streak Ratio)
+                // Need max streak for this. Let's calculate from clickHistory
+                let currentStreak = 0;
+                let maxStreak = 0;
+                this.state.clickHistory.forEach(click => {
+                    if (click.correct) currentStreak++;
+                    else {
+                        if (currentStreak > maxStreak) maxStreak = currentStreak;
+                        currentStreak = 0;
+                    }
+                });
+                if (currentStreak > maxStreak) maxStreak = currentStreak; // Final check
+
+                const consistency = totalClicks > 0 ? (maxStreak / totalClicks) * 100 : 0; 
+                
+                // 5. Pressure Handling (Accuracy under <5s)
+                const pressure = this.state.pressureClicks > 0 ? (this.state.pressureCorrect / this.state.pressureClicks) * 100 : Math.max(0, precision - 10); 
+
+                // Draw Radar
+                this.drawRadarGraph(precision, velocity, efficiency, consistency, pressure); // Note: using efficiency instead of focus for 3rd axis label match
+
+                // --- HISTORY & COMPARISON ---
+                const currentMetrics = { precision, velocity, efficiency, consistency, pressure, score: s };
+                const lastRun = HistoryManager.getLast();
+                
+                const historyEl = document.getElementById('history-section');
+                const historyContent = document.getElementById('history-content');
+                
+                if (lastRun) {
+                    historyEl.classList.remove('hidden');
+                    // Compare Score
+                    const scoreDiff = s - lastRun.score;
+                    const scoreIcon = scoreDiff >= 0 ? '<span class="text-green-500">▲</span>' : '<span class="text-red-500">▼</span>';
+                    
+                    // Compare Best Metric
+                    const getBest = (m) => Object.keys(m).reduce((a, b) => m[a] > m[b] ? a : b);
+                    const bestMetric = getBest({Precision: precision, Velocity: velocity, Efficiency: efficiency, Consistency: consistency, Pressure: pressure});
+                    
+                    // Smart Insight Logic
+                    const velDiff = velocity - (lastRun.velocity || 0);
+                    let insight = "";
+
+                    if (scoreDiff >= 0) {
+                        // Score Improved or Same
+                        if (velDiff > 5) insight = "Faster & Better score! 🚀";
+                        else if (velDiff < -5) insight = "Slower, but more precise! 🎯";
+                        else insight = "Consistent speed, higher score! ✅";
+                    } else {
+                        // Score Dropped
+                        if (velDiff > 5) insight = "Faster, but accuracy dropped. 📉";
+                        else if (velDiff < -5) insight = "Slower run this time. 🐢";
+                        else insight = "Score dropped slightly. 📉";
+                    }
+
+                    historyContent.innerHTML = `
+                        <div class="flex justify-between font-bold">
+                            <span>Score: ${s}</span>
+                            <span>${scoreIcon} ${Math.abs(scoreDiff)} vs last</span>
+                        </div>
+                        <div class="mt-1 text-xs">
+                            <p>• Strength: <span class="text-blue-500">${bestMetric}</span></p>
+                            <p>• ${insight}</p>
+                        </div>
+                    `;
+                } else {
+                    historyEl.classList.add('hidden');
+                }
+
+                // Save current run
+                HistoryManager.add(currentMetrics);
+            },
+
+            drawRadarGraph(acc, spd, eff, con, pre) {
+                const canvas = document.getElementById('radar-chart');
+                const ctx = canvas.getContext('2d');
+                const w = canvas.width;
+                const h = canvas.height;
+                const cx = w / 2;
+                const cy = h / 2;
+                const radius = (Math.min(w, h) / 2) - 40; // Padding
+                const stats = [acc, spd, eff, con, pre];
+                const labels = ["Precision", "Velocity", "Efficiency", "Consistency", "Pressure"];
+
+                // Clear
+                ctx.clearRect(0, 0, w, h);
+
+                // Draw Web
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.lineWidth = 1;
+                for (let i = 1; i <= 5; i++) {
+                    ctx.beginPath();
+                    for (let j = 0; j < 5; j++) {
+                        const angle = (Math.PI * 2 * j) / 5 - Math.PI / 2;
+                        const r = (radius / 5) * i;
+                        const x = cx + Math.cos(angle) * r;
+                        const y = cy + Math.sin(angle) * r;
+                        if (j === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                    }
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+
+                // Draw Axes & Labels
+                ctx.fillStyle = '#64748b';
+                ctx.font = 'bold 11px Inter';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                for (let j = 0; j < 5; j++) {
+                    const angle = (Math.PI * 2 * j) / 5 - Math.PI / 2;
+                    const x = cx + Math.cos(angle) * radius;
+                    const y = cy + Math.sin(angle) * radius;
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy);
+                    ctx.lineTo(x, y);
+                    ctx.strokeStyle = '#94a3b8';
+                    ctx.stroke();
+
+                    // Text position
+                    const tx = cx + Math.cos(angle) * (radius + 20);
+                    const ty = cy + Math.sin(angle) * (radius + 20);
+                    ctx.fillText(labels[j], tx, ty);
+                }
+
+                // Draw Data Shape
+                ctx.beginPath();
+                for (let j = 0; j < 5; j++) {
+                    const angle = (Math.PI * 2 * j) / 5 - Math.PI / 2;
+                    const r = (radius * (stats[j] / 100)); 
+                    const x = cx + Math.cos(angle) * r;
+                    const y = cy + Math.sin(angle) * r;
+                    if (j === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(59, 130, 246, 0.4)';
+                ctx.fill();
+                ctx.strokeStyle = '#2563eb';
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                // Contextual Feedback Text
+                let feedback = "Balanced performance.";
+                if (acc > 90 && spd > 80) feedback = "Surgical precision at high speed!";
+                else if (spd > 90 && acc < 60) feedback = "Fast, but sloppy. Focus more.";
+                else if (con < 50) feedback = "You panicked at the end!";
+                else if (eff > 90) feedback = "Flawless focus. Zen master.";
+                
+                document.getElementById('radar-feedback').innerText = feedback;
             }
         };
