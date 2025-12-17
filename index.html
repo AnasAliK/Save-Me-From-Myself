@@ -9,256 +9,152 @@
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&family=Lato:wght@400;700&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&family=Lato:wght@400;700&family=Comic+Neue:wght@700&family=Yellowtail&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css" />
+
 </head>
 <body>
 
-    <!-- 1. FULL SCREEN MENUS (Outside the Game Layout) -->
-    
-    <!-- MAIN MENU SCREEN -->
+    <!-- MENUS & GAME UI -->
+    <!-- 1. MAIN MENU -->
     <div id="screen-menu" class="fullscreen-pane active">
-        <!-- Content same as before -->
-        <div class="relative z-10 text-center max-w-lg w-full">
-            <div class="mb-8 relative animate-float inline-block">
-                <div class="w-32 h-32 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl rotate-3 shadow-2xl flex items-center justify-center text-white text-6xl ring-8 ring-white/10 backdrop-blur">
-                    <i class="ph-fill ph-shield-check"></i>
-                </div>
+        <div class="relative z-10 text-center max-w-lg w-full flex flex-col items-center">
+            <div class="mb-12 relative animate-float-slow">
+                <div class="w-40 h-40 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl rotate-3 shadow-2xl flex items-center justify-center text-white text-7xl ring-8 ring-white/10 backdrop-blur"><i class="ph-fill ph-shield-check"></i></div>
             </div>
-
-            <h1 class="text-6xl font-black text-white mb-2 tracking-tight drop-shadow-lg">
-                Save Me<br><span class="text-blue-400">From Myself</span>
-            </h1>
-            <div class="h-2 w-24 bg-blue-500 rounded-full mx-auto mb-10"></div>
-            
-            <div class="bg-white/10 backdrop-blur-md p-8 rounded-3xl shadow-2xl border border-white/10 mb-10 w-full text-left">
+            <h1 class="text-7xl font-black title-text mb-4 tracking-tight drop-shadow-lg">Save Me<br><span class="text-white">From Myself</span></h1>
+            <div class="menu-card p-8 rounded-3xl mb-12 w-full max-w-md text-left transform hover:scale-[1.02] transition-transform">
                 <p class="text-xs font-bold text-blue-300 uppercase tracking-widest mb-3">Mission Briefing</p>
-                <p class="text-slate-200 text-lg leading-relaxed font-medium">
-                    <span class="text-white font-bold">You are the Virtual Assistant.</span><br>
-                    The Boss is drunk-texting clients. Intercept and fix his messages in real-time conversations!
-                </p>
+                <p class="text-slate-200 text-lg leading-relaxed font-medium">You are the <span class="text-white font-bold">Auto-Correct Guardian</span>. Intercept disastrous texts before they ruin lives!</p>
             </div>
-
-            <button onclick="Game.goToTimeSelect()" class="group relative w-full py-6 bg-blue-600 text-white rounded-2xl font-black text-2xl shadow-xl hover:bg-blue-500 hover:scale-[1.02] active:scale-95 transition-all overflow-hidden tracking-wider">
-                <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
-                <span class="relative flex items-center justify-center gap-3">
-                    PLAY NOW <i class="ph-bold ph-play"></i>
-                </span>
-            </button>
-            <p class="mt-6 text-sm text-slate-500 font-mono">v1.0 // Alpha Test</p>
-        </div>
-        
-        <!-- Background Decorations -->
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 opacity-30 pointer-events-none">
-            <div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-purple-600 rounded-full blur-[100px]"></div>
-            <div class="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-blue-600 rounded-full blur-[120px]"></div>
+            <button onclick="Game.goToTimeSelect()" class="btn-primary w-full max-w-sm py-6 rounded-2xl font-black text-2xl text-white tracking-widest flex items-center justify-center gap-3">PLAY NOW <i class="ph-bold ph-play"></i></button>
         </div>
     </div>
 
-    <!-- TIME SELECTION SCREEN -->
+    <!-- 2. TIME SELECT -->
     <div id="screen-time" class="fullscreen-pane">
-        <!-- Content same as before -->
         <div class="max-w-2xl w-full text-center">
-            <h2 class="text-5xl font-black text-white mb-4">Select Duration</h2>
-            <p class="text-slate-400 text-xl mb-12">How long can you hold the line?</p>
-            
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 w-full mb-12">
-                <button onclick="Game.selectTime(20)" class="bg-slate-800 hover:bg-blue-600 border-2 border-slate-700 hover:border-blue-400 rounded-2xl p-8 transition-all text-white font-bold text-3xl shadow-lg">20s</button>
-                <button onclick="Game.selectTime(40)" class="bg-slate-800 hover:bg-blue-600 border-2 border-slate-700 hover:border-blue-400 rounded-2xl p-8 transition-all text-white font-bold text-3xl shadow-lg">40s</button>
-                <button onclick="Game.selectTime(60)" class="bg-slate-800 hover:bg-blue-600 border-2 border-slate-700 hover:border-blue-400 rounded-2xl p-8 transition-all text-white font-bold text-3xl shadow-lg">60s</button>
-                <button onclick="Game.selectTime(75)" class="bg-slate-800 hover:bg-blue-600 border-2 border-slate-700 hover:border-blue-400 rounded-2xl p-8 transition-all text-white font-bold text-3xl shadow-lg">75s</button>
-                <button onclick="Game.selectTime(100)" class="col-span-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 border-2 border-transparent text-white rounded-2xl p-8 font-black text-3xl shadow-xl hover:shadow-indigo-500/50 transform hover:-translate-y-1 transition-all">
-                    100s <span class="text-base font-normal opacity-70 block mt-1">Marathon Mode</span>
-                </button>
+            <h2 class="text-6xl font-black text-white mb-12 title-text">Select Duration</h2>
+            <div class="grid grid-cols-3 gap-8 w-full mb-16">
+                <button onclick="Game.selectTime(20)" class="btn-option rounded-2xl p-10 text-white font-bold text-4xl shadow-xl">20s</button>
+                <button onclick="Game.selectTime(40)" class="btn-option rounded-2xl p-10 text-white font-bold text-4xl shadow-xl">40s</button>
+                <button onclick="Game.selectTime(60)" class="btn-option rounded-2xl p-10 text-white font-bold text-4xl shadow-xl">60s</button>
             </div>
-
-            <button onclick="Game.quitToMenu()" class="text-slate-500 hover:text-white text-lg font-bold underline decoration-2 underline-offset-4 transition-colors">Cancel</button>
+            <button onclick="Game.quitToMenu()" class="text-slate-400 hover:text-white text-xl font-bold underline transition-colors">Cancel</button>
         </div>
     </div>
 
-    <!-- CHARACTER SELECTION SCREEN -->
+    <!-- 3. CHARACTER SELECT -->
     <div id="screen-char" class="fullscreen-pane">
-        <!-- Content same as before -->
-        <div class="max-w-4xl w-full text-center">
-            <h2 class="text-5xl font-black text-white mb-4">Who to Assist?</h2>
-            <p class="text-slate-400 text-xl mb-12">Select your client for today</p>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 w-full mb-12">
-                <!-- Active Character -->
-                <div class="relative bg-gradient-to-b from-blue-900 to-slate-900 border-4 border-blue-500 rounded-3xl p-6 shadow-2xl shadow-blue-500/20 flex flex-col items-center transform hover:scale-105 transition-transform cursor-pointer group">
-                    <div class="w-32 h-32 rounded-full bg-blue-100 flex items-center justify-center text-6xl mb-4 group-hover:rotate-6 transition-transform">👨‍💼</div>
-                    <span class="font-bold text-white text-xl">The Boss</span>
-                    <p class="text-blue-300 text-sm mt-2">Difficulty: Normal</p>
-                    <div class="absolute -top-4 -right-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">SELECTED</div>
+        <div class="max-w-6xl w-full text-center">
+            <h2 class="text-6xl font-black text-white mb-4 title-text">Select Client</h2>
+            <p class="text-slate-400 text-2xl mb-12">Who needs saving today?</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 w-full mb-16">
+                <div onclick="Game.selectChar('boss')" id="char-card-boss" class="char-select-card rounded-3xl p-8 flex flex-col items-center selected">
+                    <div class="char-icon-bg w-32 h-32 rounded-full bg-blue-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">👨‍💼</div>
+                    <span class="font-bold text-white text-2xl">The Boss</span>
+                    <p class="text-slate-300 text-sm mt-3 font-medium">Drunk texting staff.</p>
                 </div>
-                
-                <!-- Locked Characters -->
-                <div class="locked-char bg-slate-800 rounded-3xl p-6 border border-slate-700 flex flex-col items-center justify-center h-64">
-                    <div class="w-24 h-24 rounded-full bg-slate-700 mb-4 opacity-20"></div>
-                    <span class="font-bold text-slate-500 text-lg">???</span>
+                <div onclick="Game.selectChar('sportsman')" id="char-card-sportsman" class="char-select-card rounded-3xl p-8 flex flex-col items-center">
+                    <div class="char-icon-bg w-32 h-32 rounded-full bg-red-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">🏋️</div>
+                    <span class="font-bold text-white text-2xl">Gym Bro</span>
+                    <p class="text-slate-300 text-sm mt-3 font-medium">Too pumped to spell.</p>
                 </div>
-                <div class="locked-char bg-slate-800 rounded-3xl p-6 border border-slate-700 flex flex-col items-center justify-center h-64">
-                    <div class="w-24 h-24 rounded-full bg-slate-700 mb-4 opacity-20"></div>
-                    <span class="font-bold text-slate-500 text-lg">???</span>
+                <div onclick="Game.selectChar('kid')" id="char-card-kid" class="char-select-card rounded-3xl p-8 flex flex-col items-center">
+                    <div class="char-icon-bg w-32 h-32 rounded-full bg-green-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">🧢</div>
+                    <span class="font-bold text-white text-2xl">The Kid</span>
+                    <p class="text-slate-300 text-sm mt-3 font-medium">Pranking for V-Bucks.</p>
                 </div>
-                <div class="locked-char bg-slate-800 rounded-3xl p-6 border border-slate-700 flex flex-col items-center justify-center h-64">
-                    <div class="w-24 h-24 rounded-full bg-slate-700 mb-4 opacity-20"></div>
-                    <span class="font-bold text-slate-500 text-lg">???</span>
+                <div onclick="Game.selectChar('girl')" id="char-card-girl" class="char-select-card rounded-3xl p-8 flex flex-col items-center">
+                    <div class="char-icon-bg w-32 h-32 rounded-full bg-pink-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">💇‍♀️</div>
+                    <span class="font-bold text-white text-2xl">Sophie</span>
+                    <p class="text-slate-300 text-sm mt-3 font-medium">Gossiping at 100mph.</p>
                 </div>
             </div>
-
-            <button onclick="Game.startGame()" class="w-full md:w-96 py-5 bg-white text-slate-900 rounded-2xl font-black text-2xl shadow-xl shadow-white/10 hover:bg-blue-50 transition-all hover:scale-105">
-                START ASSIGNMENT
-            </button>
-            <div class="mt-8">
-                <button onclick="Game.goToTimeSelect()" class="text-slate-500 hover:text-white text-lg font-bold underline decoration-2 underline-offset-4 transition-colors">Back</button>
-            </div>
+            
+            <button onclick="Game.startGame()" class="btn-primary w-full md:w-[500px] py-6 rounded-2xl font-black text-2xl text-white shadow-2xl tracking-widest">START ASSIGNMENT</button>
+            <div class="mt-8"><button onclick="Game.goToTimeSelect()" class="text-slate-400 hover:text-white text-xl font-bold underline transition-colors">Back</button></div>
         </div>
     </div>
 
-    <!-- 2. GAME LAYOUT (Boss + Phone) -->
+    <!-- 4. GAMEPLAY -->
     <div id="game-layout-container" class="game-layout">
-        
-        <!-- === WORLD SCENE (CCTV) === -->
         <div class="world-scene" id="game-scene">
-            <div class="cam-ui">
-                <span class="rec-dot"></span>CAM 04 [LIVE]
-            </div>
+            <div class="cam-ui"><span class="rec-dot"></span>CAM 04 [LIVE]</div>
             
-            <!-- NEW Detailed Background Elements -->
-            <div class="office-window">
-                <div class="city-skyline"></div>
-                <div class="window-reflection"></div>
-                <div class="blind-slats"></div>
-            </div>
+            <!-- BACKGROUND PROPS -->
+            <div class="bg-prop office-window" id="prop-window"><div class="city-skyline"></div><div class="window-reflection"></div><div class="blind-slats"></div></div>
+            <div class="bg-prop office-bookshelf" id="prop-shelf"><div class="shelf-row"><div class="book" style="height:80%;background:#ef4444"></div></div><div class="shelf-row"></div></div>
+            <div class="bg-prop office-painting" id="prop-painting"><div class="art-canvas"></div></div>
             
-            <div class="office-bookshelf">
-                <div class="shelf-row">
-                    <div class="book" style="height: 80%; background: #ef4444;"></div>
-                    <div class="book" style="height: 90%; background: #3b82f6;"></div>
-                    <div class="book" style="height: 70%; background: #22c55e;"></div>
-                </div>
-                <div class="shelf-row">
-                    <div class="book" style="height: 85%; background: #eab308; width: 15px;"></div>
-                    <div class="book" style="height: 75%; background: #a855f7;"></div>
-                </div>
-                <div class="shelf-row">
-                    <!-- Empty shelf -->
-                </div>
-            </div>
+            <div class="bg-prop prop-lockers flex" id="prop-lockers"><div class="locker"></div><div class="locker"></div><div class="locker"></div></div>
+            <div class="bg-prop prop-brick" id="prop-brick"></div>
+            <div class="bg-prop prop-poster" id="prop-poster"></div>
+            
+            <!-- NEW KID/SOPHIE PROPS -->
+            <div class="bg-prop prop-leds" id="prop-leds"></div>
+            <div class="bg-prop prop-skateboard" id="prop-skateboard"></div>
+            <div class="bg-prop prop-plant" id="prop-plant"><div class="pot"></div><div class="leaves"></div></div>
+            <div class="bg-prop prop-neon" id="prop-neon">VIBES</div>
+            <div class="bg-prop prop-menu flex" id="prop-menu"></div> <!-- Added flex here -->
+            <div class="bg-prop prop-mess" id="prop-mess"></div>
 
-            <!-- NEW PAINTING -->
-            <div class="office-painting">
-                <div class="art-canvas"></div>
-            </div>
 
+            <!-- CHARACTER -->
             <div id="boss" class="boss-container">
                 <div class="head"></div>
-                <div class="glasses"></div>
-                <div class="body"></div>
-                <div class="shirt"></div>
-                <div class="tie"></div>
-                <div class="boss-phone"></div> 
-                <div class="arm left"><div class="hand"></div></div>
-                <div class="arm right"><div class="hand"></div></div>
+                <div class="glasses" id="char-glasses"></div><div class="cap" id="char-cap"></div><div class="headband" id="char-headband"></div><div class="hair-long" id="char-hair"></div><div class="hair-bangs" id="char-bangs"></div>
+                <div class="body"></div><div class="shirt"></div><div class="tie" id="char-tie"></div><div class="necklace" id="char-necklace"></div>
+                <div class="boss-phone"></div><div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
                 
-                <!-- NEW Detailed Desk -->
+                <!-- DESK -->
                 <div class="desk">
-                    <!-- Front face of the desk (thickness) -->
                     <div class="desk-front"></div>
-                    
-                    <!-- Raised Upper Slab (Shelf) -->
-                    <div class="desk-upper-slab">
-                        <div class="desk-nameplate">THE BOSS</div>
-                        <div class="coffee-mug">
-                            <div class="coffee-liquid"></div>
-                            <div class="steam"></div>
-                        </div>
+                    <div class="desk-upper-slab" id="prop-slab">
+                        <div class="desk-prop prop-nameplate" id="prop-nameplate">THE BOSS</div>
+                        <div class="desk-prop prop-mug" id="prop-mug"><div class="coffee-liquid"></div><div class="steam"></div></div>
                     </div>
-
-                    <!-- Writing Mat -->
-                    <div class="desk-mat"></div>
+                    <div class="desk-prop prop-shaker" id="prop-shaker"></div>
+                    <div class="desk-prop prop-controller" id="prop-controller"></div>
+                    <div class="desk-prop prop-latte" id="prop-latte"></div>
+                    <div class="desk-mat" id="prop-mat"></div>
                 </div>
             </div>
         </div>
 
-        <!-- === DEVICE FRAME === -->
+        <!-- DEVICE FRAME -->
         <div class="device-frame">
             <div class="device-notch"></div>
-
-            <!-- GAME SCREEN (Inside Phone) -->
             <div id="screen-game" class="screen app-view relative">
                 <div id="app-header" class="app-header pt-10 pb-3 px-4 z-20 flex items-center justify-between sticky top-0">
                     <div class="flex items-center gap-3">
-                        <!-- Pause Button -->
-                        <button onclick="Game.togglePause()" class="w-8 h-8 flex items-center justify-center rounded-full bg-black/5 hover:bg-black/10 transition-colors">
-                            <i class="ph-fill ph-pause text-lg"></i>
-                        </button>
-                        
+                        <button onclick="Game.togglePause()" class="w-8 h-8 flex items-center justify-center rounded-full bg-black/5 hover:bg-black/10"><i class="ph-fill ph-pause text-lg"></i></button>
                         <div class="flex items-center gap-2">
-                            <div id="app-avatar" class="w-9 h-9 rounded-full bg-slate-200 flex items-center justify-center text-lg shadow-inner overflow-hidden">
-                                <i class="ph-fill ph-user" id="avatar-icon"></i>
-                            </div>
-                            <div class="leading-tight">
-                                <div id="contact-name" class="font-bold text-sm">Boss</div>
-                                <div class="text-[10px] opacity-70 flex items-center gap-1">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span> Online
-                                </div>
-                            </div>
+                            <div id="app-avatar" class="w-9 h-9 rounded-full bg-slate-200 flex items-center justify-center text-lg shadow-inner overflow-hidden"><i class="ph-fill ph-user" id="avatar-icon"></i></div>
+                            <div class="leading-tight"><div id="contact-name" class="font-bold text-sm">Boss</div><div class="text-[10px] opacity-70 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span> Online</div></div>
                         </div>
                     </div>
-                    
-                    <div class="flex flex-col items-end">
-                        <div class="flex items-center gap-1 font-mono font-bold text-lg leading-none" id="timer-box">
-                            <i class="ph-fill ph-clock"></i> <span id="timer">00.0</span>
-                        </div>
-                        <div class="text-[10px] font-bold opacity-60">SCORE: <span id="score">0</span></div>
-                    </div>
+                    <div class="flex flex-col items-end"><div class="flex items-center gap-1 font-mono font-bold text-lg leading-none" id="timer-box"><i class="ph-fill ph-clock"></i> <span id="timer">00.0</span></div><div class="text-[10px] font-bold opacity-60">SCORE: <span id="score">0</span></div></div>
                 </div>
-
-                <div class="w-full h-1 bg-black/5 z-20">
-                    <div id="progress-bar" class="h-full bg-current transition-all duration-100 ease-linear w-full opacity-50"></div>
-                </div>
-
-                <div class="flex-1 overflow-y-auto p-4 flex flex-col relative" id="chat-scroll-area">
-                    <div class="flex-1"></div> <!-- Spacer to push msgs down -->
-                    <!-- Chat history bubbles injected here -->
-                </div>
-
-                <!-- Moved Feedback here -->
-                <div id="feedback" class="absolute inset-0 pointer-events-none flex items-center justify-center z-30 opacity-0 transform scale-50 transition-all duration-300">
-                    <span id="feedback-text" class="text-5xl font-black text-green-500 drop-shadow-lg -rotate-6 border-4 border-green-500 px-4 py-1 rounded-xl bg-white/90">SAVED!</span>
-                </div>
-
+                <div class="w-full h-1 bg-black/5 z-20"><div id="progress-bar" class="h-full bg-current transition-all duration-100 ease-linear w-full opacity-50"></div></div>
+                <div class="flex-1 overflow-y-auto p-4 flex flex-col relative" id="chat-scroll-area"><div class="flex-1"></div></div>
+                <div id="feedback" class="absolute inset-0 pointer-events-none flex items-center justify-center z-30 opacity-0 transform scale-50 transition-all duration-300"><span id="feedback-text" class="text-5xl font-black text-green-500 drop-shadow-lg -rotate-6 border-4 border-green-500 px-4 py-1 rounded-xl bg-white/90">SAVED!</span></div>
                 <div id="typing-area" class="px-4 pb-2 w-full flex flex-col items-end gap-1">
-                     <div id="message-container" class="message-box p-4 w-full relative typing-cursor">
-                        <!-- Active typing text injected here -->
-                    </div>
-                    <div class="flex justify-between w-full px-1">
-                        <span id="status-indicator" class="text-[10px] font-bold opacity-40 uppercase tracking-widest text-blue-500 h-4"></span>
-                        <i class="ph-bold ph-checks text-blue-500 opacity-0 transition-opacity" id="read-receipt"></i>
-                    </div>
+                     <div id="message-container" class="message-box p-4 w-full relative typing-cursor"></div>
+                    <div class="flex justify-between w-full px-1"><span id="status-indicator" class="text-[10px] font-bold opacity-40 uppercase tracking-widest text-blue-500 h-4"></span><i class="ph-bold ph-checks text-blue-500 opacity-0 transition-opacity" id="read-receipt"></i></div>
                 </div>
-
-                <div id="footer" class="p-3 pb-8 z-20 transition-colors duration-300 border-t border-black/5 bg-white/50 backdrop-blur-md">
-                    <button id="send-btn" class="w-full h-14 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-sm border border-black/5 bg-white text-slate-400 cursor-not-allowed">
-                        <span>Intercept</span> <i class="ph-bold ph-shield-check"></i>
-                    </button>
-                </div>
-
+                <div id="footer" class="p-3 pb-8 z-20 transition-colors duration-300 border-t border-black/5 bg-white/50 backdrop-blur-md"><button id="send-btn" class="w-full h-14 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-sm border border-black/5 bg-white text-slate-400 cursor-not-allowed"><span>Intercept</span> <i class="ph-bold ph-shield-check"></i></button></div>
                 <div id="popup" class="hidden absolute z-50 bg-white rounded-xl shadow-2xl ring-1 ring-black/5 p-1 flex-col min-w-[140px] animate-pop origin-bottom-left bottom-24"></div>
             </div>
-
-            <!-- PAUSE OVERLAY (Inside Phone) -->
+            
             <div id="screen-pause" class="hidden absolute inset-0 z-50 bg-slate-900/80 backdrop-blur-md flex flex-col items-center justify-center p-6 animate-fade">
                 <h2 class="text-white text-4xl font-black mb-8 tracking-wider">PAUSED</h2>
-                <button onclick="Game.togglePause()" class="w-48 bg-white hover:bg-slate-100 text-slate-900 font-bold py-3 rounded-xl mb-4 shadow-lg transition-transform hover:scale-105">RESUME</button>
-                <button onclick="AudioSys.toggleMute()" id="mute-btn" class="w-48 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded-xl mb-4 shadow-lg transition-transform hover:scale-105">MUTE SOUND</button>
-                <button onclick="Game.quitToMenu()" class="w-48 bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl shadow-lg transition-transform hover:scale-105">MAIN MENU</button>
+                <button onclick="Game.togglePause()" class="w-48 bg-white hover:bg-slate-100 text-slate-900 font-bold py-3 rounded-xl mb-4">RESUME</button>
+                <button onclick="AudioSys.toggleMute()" id="mute-btn" class="w-48 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded-xl mb-4">MUTE SOUND</button>
+                <button onclick="Game.quitToMenu()" class="w-48 bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl">MAIN MENU</button>
             </div>
 
-            <!-- RESULTS SCREEN (Inside Phone) -->
             <div id="screen-result" class="screen bg-white/90 backdrop-blur-sm items-center justify-center p-6 text-center z-30">
                 <div id="rank-card" class="bg-white w-full rounded-3xl shadow-xl p-8 mb-6 border border-slate-200 transform transition-all hover:scale-105 duration-500">
                     <div class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Performance Review</div>
@@ -266,24 +162,16 @@
                     <h2 id="rank-grade" class="text-6xl font-black text-slate-800 mb-2">B-</h2>
                     <h3 id="rank-title" class="text-xl font-bold text-blue-600 mb-4">Mediocre Typer</h3>
                     <div class="grid grid-cols-2 gap-4 border-t border-slate-100 pt-6">
-                        <div>
-                            <div class="text-2xl font-black text-slate-800" id="final-score">0</div>
-                            <div class="text-xs text-slate-400 uppercase font-bold">Score</div>
-                        </div>
-                        <div>
-                            <div class="text-2xl font-black text-slate-800" id="final-count">0</div>
-                            <div class="text-xs text-slate-400 uppercase font-bold">Msgs Saved</div>
-                        </div>
+                        <div><div class="text-2xl font-black text-slate-800" id="final-score">0</div><div class="text-xs text-slate-400 uppercase font-bold">Score</div></div>
+                        <div><div class="text-2xl font-black text-slate-800" id="final-count">0</div><div class="text-xs text-slate-400 uppercase font-bold">Msgs Saved</div></div>
                     </div>
                 </div>
-                <button onclick="Game.goToTimeSelect()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold text-lg shadow-lg shadow-blue-200 hover:bg-blue-500 transition-colors flex items-center justify-center gap-2">
-                    <i class="ph-bold ph-arrow-counter-clockwise"></i> New Job
-                </button>
+                <button onclick="Game.goToTimeSelect()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold text-lg shadow-lg hover:bg-blue-500 transition-colors">New Job</button>
                 <button onclick="Game.quitToMenu()" class="mt-4 text-slate-400 font-bold text-sm">Main Menu</button>
             </div>
         </div>
-
     </div>
+
 <script src="script.js" defer></script>
 </body>
 </html>
