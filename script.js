@@ -9,7 +9,24 @@
         };
 
         // --- HISTORY MANAGER ---
-
+        const HistoryManager = {
+            key: 'saveMeRunHistory_v2',
+            get() {
+                try { return JSON.parse(localStorage.getItem(this.key)) || []; } 
+                catch(e) { return []; }
+            },
+            add(runData) {
+                const history = this.get();
+                history.push(runData);
+                // Keep last 3 runs
+                if (history.length > 3) history.shift();
+                localStorage.setItem(this.key, JSON.stringify(history));
+            },
+            getLast() {
+                const h = this.get();
+                return h.length > 0 ? h[h.length - 1] : null;
+            }
+        };
 
         const CONVERSATIONS_DATA = {
             boss: {
@@ -219,7 +236,6 @@
                     const el = document.getElementById(elId);
                     if(el) el.style.display = (el.classList.contains('flex') ? 'flex' : (el.tagName==='DIV' && el.classList.contains('desk-upper-slab') ? 'flex' : 'block'));
                     
-                    // Specific Class Toggles for body shape
                     const container = document.getElementById('boss');
                     container.classList.remove('char-girl', 'char-sportsman', 'char-kid');
                     if (propList.includes('char-hair')) container.classList.add('char-girl');
@@ -273,24 +289,7 @@
         };
 
         // --- HISTORY MANAGER ---
-        const HistoryManager = {
-            key: 'saveMeRunHistory_v2',
-            get() {
-                try { return JSON.parse(localStorage.getItem(this.key)) || []; } 
-                catch(e) { return []; }
-            },
-            add(runData) {
-                const history = this.get();
-                history.push(runData);
-                // Keep last 3 runs
-                if (history.length > 3) history.shift();
-                localStorage.setItem(this.key, JSON.stringify(history));
-            },
-            getLast() {
-                const h = this.get();
-                return h.length > 0 ? h[h.length - 1] : null;
-            }
-        };
+
 
         const Game = {
             state: { 
@@ -372,6 +371,7 @@
                 Boss.setColors(char.colors);
                 Boss.setProps(char.props);
 
+                // --- NEW SELECTION LOGIC ---
                 const charConvoData = CONVERSATIONS_DATA[char.id];
                 const availableApps = char.apps.filter(app => charConvoData[app]);
                 const selectedApp = availableApps[Math.floor(Math.random() * availableApps.length)];
@@ -532,9 +532,9 @@
                 // 1. Precision (0-100)
                 const precision = totalClicks > 0 ? (this.state.correctClicks / totalClicks) * 100 : 0;
 
-                // 2. Velocity (Clicks per second normalized to 100, target 1.5 clicks/sec)
+                // 2. Velocity (Clicks per second normalized to 100, target 0.8 clicks/sec to account for read delays)
                 const speedRaw = totalClicks / (timeElapsed || 1);
-                const velocity = Math.min(100, (speedRaw / 1.5) * 100);
+                const velocity = Math.min(100, (speedRaw / 0.8) * 100);
 
                 // 3. Efficiency (Score per second, normalized to target 150 score/sec)
                 const efficiencyRaw = s / (timeElapsed || 1);

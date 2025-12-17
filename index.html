@@ -15,10 +15,13 @@
 </head>
 <body>
 
+    <!-- MENUS & GAME UI -->
     <!-- 1. MAIN MENU -->
     <div id="screen-menu" class="fullscreen-pane active">
         <div class="relative z-10 text-center max-w-lg w-full flex flex-col items-center">
-            <div class="mb-12 relative animate-float-slow"><div class="w-40 h-40 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl rotate-3 shadow-2xl flex items-center justify-center text-white text-7xl ring-8 ring-white/10 backdrop-blur"><i class="ph-fill ph-shield-check"></i></div></div>
+            <div class="mb-12 relative animate-float-slow">
+                <div class="w-40 h-40 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl rotate-3 shadow-2xl flex items-center justify-center text-white text-7xl ring-8 ring-white/10 backdrop-blur"><i class="ph-fill ph-shield-check"></i></div>
+            </div>
             <h1 class="text-7xl font-black title-text mb-4 tracking-tight drop-shadow-lg">Save Me<br><span class="text-white">From Myself</span></h1>
             <div class="menu-card p-8 rounded-3xl mb-12 w-full max-w-md text-left transform hover:scale-[1.02] transition-transform">
                 <p class="text-xs font-bold text-blue-300 uppercase tracking-widest mb-3">Mission Briefing</p>
@@ -46,20 +49,30 @@
         <div class="max-w-6xl w-full text-center">
             <h2 class="text-6xl font-black text-white mb-4 title-text">Select Client</h2>
             <p class="text-slate-400 text-2xl mb-12">Who needs saving today?</p>
+            
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 w-full mb-16">
                 <div onclick="Game.selectChar('boss')" id="char-card-boss" class="char-select-card rounded-3xl p-8 flex flex-col items-center selected">
-                    <div class="char-icon-bg w-32 h-32 rounded-full bg-blue-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">👨‍💼</div><span class="font-bold text-white text-2xl">The Boss</span><p class="text-slate-300 text-sm mt-3 font-medium">Drunk texting staff.</p>
+                    <div class="char-icon-bg w-32 h-32 rounded-full bg-blue-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">👨‍💼</div>
+                    <span class="font-bold text-white text-2xl">The Boss</span>
+                    <p class="text-slate-300 text-sm mt-3 font-medium">Drunk texting staff.</p>
                 </div>
                 <div onclick="Game.selectChar('sportsman')" id="char-card-sportsman" class="char-select-card rounded-3xl p-8 flex flex-col items-center">
-                    <div class="char-icon-bg w-32 h-32 rounded-full bg-red-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">🏋️</div><span class="font-bold text-white text-2xl">Gym Bro</span><p class="text-slate-300 text-sm mt-3 font-medium">Too pumped to spell.</p>
+                    <div class="char-icon-bg w-32 h-32 rounded-full bg-red-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">🏋️</div>
+                    <span class="font-bold text-white text-2xl">Gym Bro</span>
+                    <p class="text-slate-300 text-sm mt-3 font-medium">Too pumped to spell.</p>
                 </div>
                 <div onclick="Game.selectChar('kid')" id="char-card-kid" class="char-select-card rounded-3xl p-8 flex flex-col items-center">
-                    <div class="char-icon-bg w-32 h-32 rounded-full bg-green-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">🧢</div><span class="font-bold text-white text-2xl">The Kid</span><p class="text-slate-300 text-sm mt-3 font-medium">Pranking for V-Bucks.</p>
+                    <div class="char-icon-bg w-32 h-32 rounded-full bg-green-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">🧢</div>
+                    <span class="font-bold text-white text-2xl">The Kid</span>
+                    <p class="text-slate-300 text-sm mt-3 font-medium">Pranking for V-Bucks.</p>
                 </div>
                 <div onclick="Game.selectChar('girl')" id="char-card-girl" class="char-select-card rounded-3xl p-8 flex flex-col items-center">
-                    <div class="char-icon-bg w-32 h-32 rounded-full bg-pink-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">💇‍♀️</div><span class="font-bold text-white text-2xl">Sophie</span><p class="text-slate-300 text-sm mt-3 font-medium">Gossiping at 100mph.</p>
+                    <div class="char-icon-bg w-32 h-32 rounded-full bg-pink-100/90 flex items-center justify-center text-6xl mb-6 shadow-lg">💇‍♀️</div>
+                    <span class="font-bold text-white text-2xl">Sophie</span>
+                    <p class="text-slate-300 text-sm mt-3 font-medium">Gossiping at 100mph.</p>
                 </div>
             </div>
+            
             <button onclick="Game.startGame()" class="btn-primary w-full md:w-[500px] py-6 rounded-2xl font-black text-2xl text-white shadow-2xl tracking-widest">START ASSIGNMENT</button>
             <div class="mt-8"><button onclick="Game.goToTimeSelect()" class="text-slate-400 hover:text-white text-xl font-bold underline transition-colors">Back</button></div>
         </div>
@@ -70,12 +83,16 @@
         <div class="world-scene" id="game-scene">
             <div class="cam-ui"><span class="rec-dot"></span>CAM 04 [LIVE]</div>
             
+            <!-- BACKGROUND PROPS -->
             <div class="bg-prop office-window" id="prop-window"><div class="city-skyline"></div><div class="window-reflection"></div><div class="blind-slats"></div></div>
             <div class="bg-prop office-bookshelf" id="prop-shelf"><div class="shelf-row"><div class="book" style="height:80%;background:#ef4444"></div></div><div class="shelf-row"></div></div>
             <div class="bg-prop office-painting" id="prop-painting"><div class="art-canvas"></div></div>
+            
             <div class="bg-prop prop-lockers flex" id="prop-lockers"><div class="locker"></div><div class="locker"></div><div class="locker"></div></div>
             <div class="bg-prop prop-brick" id="prop-brick"></div>
             <div class="bg-prop prop-poster" id="prop-poster"></div>
+            
+            <!-- NEW KID/SOPHIE PROPS -->
             <div class="bg-prop prop-leds" id="prop-leds"></div>
             <div class="bg-prop prop-skateboard" id="prop-skateboard"></div>
             <div class="bg-prop prop-plant" id="prop-plant"><div class="pot"></div><div class="leaves"></div></div>
@@ -83,11 +100,15 @@
             <div class="bg-prop prop-menu flex" id="prop-menu"></div>
             <div class="bg-prop prop-mess" id="prop-mess"></div>
 
+
+            <!-- CHARACTER -->
             <div id="boss" class="boss-container">
                 <div class="head"></div>
                 <div class="glasses" id="char-glasses"></div><div class="cap" id="char-cap"></div><div class="headband" id="char-headband"></div><div class="hair-long" id="char-hair"></div><div class="hair-bangs" id="char-bangs"></div>
                 <div class="body"></div><div class="shirt"></div><div class="tie" id="char-tie"></div><div class="necklace" id="char-necklace"></div>
                 <div class="boss-phone"></div><div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
+                
+                <!-- DESK -->
                 <div class="desk">
                     <div class="desk-front"></div>
                     <div class="desk-upper-slab" id="prop-slab">
@@ -102,6 +123,7 @@
             </div>
         </div>
 
+        <!-- DEVICE FRAME -->
         <div class="device-frame">
             <div class="device-notch"></div>
             <div id="screen-game" class="screen app-view relative">
