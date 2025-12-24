@@ -4,7 +4,7 @@
 
 **Genre:** Fast-paced Text Puzzle / Humor
 **Platform:** Web (HTML5, itch.io)
-**Playtime:** 20 seconds per run
+**Playtime:** 20/40/60 seconds per run
 **Dev:** —––
 
 ---
@@ -290,36 +290,8 @@ Options:
 
 ---
 
-## **16. Scenes (Godot)**
 
-```
-/scenes
-  TitleScreen.tscn
-  Game.tscn
-  ResultScreen.tscn
-  WordPopup.tscn
-
-/scripts
-  GameManager.gd
-  MessageManager.gd
-  WordButton.gd
-  TimerManager.gd
-```
-
-### **Game.tscn Structure**
-
-```
-Game
-├── MessagePanel
-├── TimerLabel
-├── PopupLayer
-├── SendButtonFake
-└── MessageManager
-```
-
----
-
-## **17. Gameplay Systems**
+## **16. Gameplay Systems**
 
 ### **1. Message System**
 
@@ -347,7 +319,7 @@ Game
 
 ---
 
-## **18. Performance (Web)**
+## **17. Performance (Web)**
 
 * No fonts > 256px
 * No particles > 20
@@ -357,7 +329,7 @@ Game
 
 ---
 
-## **19. Polish Additions**
+## **18. Polish Additions**
 
 * SEND button shake every 3s
 * Character tries to send early
@@ -370,7 +342,7 @@ Game
 
 ---
 
-## **20. Monetization**
+## **19. Monetization**
 
 **None — jam game.**
 Possible future:
@@ -383,5 +355,3 @@ Possible future:
 ---
 
 
-✅ add images / UI mockups
-Just tell me!
