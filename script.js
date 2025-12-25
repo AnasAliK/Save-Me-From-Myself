@@ -180,7 +180,7 @@ const CONVERSATIONS_DATA = {
                 {type:'recv',text:"The team is working overtime already."},
                 {type:'sent',text:"I apreciate the effort, we must deliver.",mistakes:[{o:"apreciate",c:"appreciate",l:["appreciate","ate"]}]},
                 {type:'recv',text:"Can we push the launch back?"},
-                {type:'sent',text:"Absolutly not, the client expects it Monday.",mistakes:[{o:"Absolutly",c:"Absolutely",l:["absolutely","absolute"]}]},
+                {type:'sent',text:"Absolutly not, the client expects it Monday.",mistakes:[{o:"Absolutly",c:"Absolutely",l:["Absolutely","absolute"]}]},
                 {type:'recv',text:"We might have to cut some features."},
                 {type:'sent',text:"Only if they are non-esential for the demo.",mistakes:[{o:"non-esential",c:"non-essential",l:["non-essential","sent"]}]},
                 {type:'recv',text:"The UI is still buggy."},
